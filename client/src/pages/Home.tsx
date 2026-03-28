@@ -113,9 +113,12 @@ function Nav() {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-[#05070a]/95 backdrop-blur-md border-b border-white/5" : "bg-transparent"}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between h-18 lg:h-24">
-        <a href="#" className="flex items-center gap-4">
+        <a href="#" className="flex items-center gap-3">
           <img src={LOGO_URL} alt="RRS" className="h-12 lg:h-16 w-auto" />
-          <span className="hidden sm:inline text-white font-bold text-base lg:text-lg tracking-wide">Revenue Relay<br className="hidden lg:inline" /> Systems</span>
+          <div className="flex flex-col leading-tight">
+            <span className="text-white font-extrabold text-sm sm:text-base lg:text-xl tracking-wide">REVENUE RELAY</span>
+            <span className="text-[#00d4ff] font-bold text-xs sm:text-sm lg:text-base tracking-[0.15em]">SYSTEMS</span>
+          </div>
         </a>
 
         {/* Desktop links */}
