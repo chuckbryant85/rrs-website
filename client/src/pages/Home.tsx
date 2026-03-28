@@ -112,9 +112,10 @@ function Nav() {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-[#05070a]/95 backdrop-blur-md border-b border-white/5" : "bg-transparent"}`}>
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between h-16 lg:h-20">
-        <a href="#" className="flex items-center gap-3">
-          <img src={LOGO_URL} alt="RRS" className="h-8 lg:h-10 w-auto" />
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between h-18 lg:h-24">
+        <a href="#" className="flex items-center gap-4">
+          <img src={LOGO_URL} alt="RRS" className="h-12 lg:h-16 w-auto" />
+          <span className="hidden sm:inline text-white font-bold text-base lg:text-lg tracking-wide">Revenue Relay<br className="hidden lg:inline" /> Systems</span>
         </a>
 
         {/* Desktop links */}
@@ -613,7 +614,10 @@ function Footer() {
   return (
     <footer className="py-8 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <img src={LOGO_URL} alt="RRS" className="h-6 w-auto opacity-60" />
+        <div className="flex items-center gap-3">
+          <img src={LOGO_URL} alt="RRS" className="h-8 w-auto opacity-60" />
+          <span className="text-[#a0aab5]/50 text-sm font-semibold tracking-wide">Revenue Relay Systems</span>
+        </div>
         <p className="text-[#a0aab5]/50 text-xs tracking-wide">
           &copy; {new Date().getFullYear()} Revenue Relay Systems. All rights reserved.
         </p>
