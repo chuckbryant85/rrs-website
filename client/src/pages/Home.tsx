@@ -115,14 +115,10 @@ function Nav() {
   }, []);
 
   const links = [
-    { label: "Problem", href: "#problem" },
     { label: "Solution", href: "#solution" },
-    { label: "Features", href: "#features" },
     { label: "Results", href: "#results" },
     { label: "Team", href: "#team" },
-    { label: "Contact", href: "#contact" },
     { label: "Pricing", href: "/pricing" },
-    { label: "Calculator", href: "/calculator" },
   ];
 
   return (
@@ -137,14 +133,14 @@ function Nav() {
         </a>
 
         {/* Desktop links */}
-        <div className="hidden lg:flex items-center gap-10">
+        <div className="hidden lg:flex items-center gap-8">
           {links.map((l) => (
             <a key={l.href} href={l.href} className="text-[#a0aab5] hover:text-white text-sm font-medium tracking-wide uppercase transition-colors duration-200">
               {l.label}
             </a>
           ))}
-          <a href="#contact" className="ml-4 px-6 py-2.5 border border-[#00d4ff] text-[#00d4ff] text-sm font-semibold tracking-wide uppercase hover:bg-[#00d4ff] hover:text-[#05070a] transition-all duration-300">
-            Get Started
+          <a href="/calculator" className="ml-2 px-6 py-2.5 bg-[#00d4ff] text-[#05070a] text-sm font-bold tracking-wide uppercase hover:bg-[#00b8e0] transition-all duration-300">
+            Calculate ROI
           </a>
         </div>
 
@@ -166,8 +162,8 @@ function Nav() {
               {l.label}
             </a>
           ))}
-          <a href="#contact" onClick={() => setMobileOpen(false)} className="mt-3 block text-center px-6 py-2.5 border border-[#00d4ff] text-[#00d4ff] text-sm font-semibold tracking-wide uppercase">
-            Get Started
+          <a href="/calculator" onClick={() => setMobileOpen(false)} className="mt-3 block text-center px-6 py-2.5 bg-[#00d4ff] text-[#05070a] text-sm font-bold tracking-wide uppercase">
+            Calculate ROI
           </a>
         </motion.div>
       )}
