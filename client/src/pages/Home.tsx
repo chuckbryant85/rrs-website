@@ -459,6 +459,7 @@ const industries = [
   {
     icon: ShoppingCart,
     label: "Retail / Grocery",
+    color: "#00d4ff",
     lostLabel: "LOST DAILY",
     lostAmount: "$10,000",
     lostDetail: "500 customers × $20 missed upsell per cart",
@@ -472,6 +473,7 @@ const industries = [
   {
     icon: Building2,
     label: "Hospitality",
+    color: "#a855f7",
     lostLabel: "MISSED DAILY",
     lostAmount: "$15,000",
     lostDetail: "100 rooms × $150 in missed upsells per guest",
@@ -485,6 +487,7 @@ const industries = [
   {
     icon: Wrench,
     label: "HVAC / Plumbing",
+    color: "#f59e0b",
     lostLabel: "LOST DAILY",
     lostAmount: "$4,000",
     lostDetail: "10 missed calls × $400 avg job value",
@@ -498,6 +501,7 @@ const industries = [
   {
     icon: Landmark,
     label: "Municipalities",
+    color: "#10b981",
     lostLabel: "WASTED DAILY",
     lostAmount: "$10,000",
     lostDetail: "1,000 requests × $5–$12 per call center request",
@@ -514,6 +518,7 @@ function RevenueImpact() {
   const [active, setActive] = useState(0);
   const ind = industries[active];
   const Icon = ind.icon;
+  const c = ind.color;
 
   return (
     <Section id="results" className="py-28 lg:py-40 bg-[#0a0e1a]">
@@ -534,11 +539,12 @@ function RevenueImpact() {
               <button
                 key={i}
                 onClick={() => setActive(i)}
-                className={`flex items-center gap-2 px-5 py-3 text-sm font-semibold tracking-wide uppercase transition-all duration-300 border ${
+                className="flex items-center gap-2 px-5 py-3 text-sm font-semibold tracking-wide uppercase transition-all duration-300 border"
+                style={
                   active === i
-                    ? "border-[#00d4ff] text-[#00d4ff] bg-[#00d4ff]/5"
-                    : "border-white/10 text-[#a0aab5] hover:border-white/20 hover:text-white"
-                }`}
+                    ? { borderColor: item.color, color: item.color, backgroundColor: `${item.color}0d` }
+                    : { borderColor: 'rgba(255,255,255,0.1)', color: '#a0aab5' }
+                }
               >
                 <TabIcon size={16} />
                 {item.label}
@@ -569,25 +575,25 @@ function RevenueImpact() {
             </div>
 
             {/* ARROW / TRANSITION */}
-            <div className="bg-[#05070a] border-y border-white/5 lg:border lg:border-[#00d4ff]/20 p-8 lg:p-10 flex flex-col items-center justify-center">
-              <div className="text-[#00d4ff] mb-4">
+            <div className="bg-[#05070a] border-y border-white/5 lg:border p-8 lg:p-10 flex flex-col items-center justify-center" style={{ borderColor: `${c}33` }}>
+              <div style={{ color: c }} className="mb-4">
                 <ArrowRight size={32} className="hidden lg:block" />
                 <ChevronDown size={32} className="lg:hidden" />
               </div>
               <span className="text-white font-black text-lg tracking-wide uppercase">With RRS</span>
               <div className="flex items-center gap-2 mt-2">
-                <Icon size={16} className="text-[#00d4ff]" />
-                <span className="text-[#00d4ff] text-sm font-semibold">{ind.label}</span>
+                <Icon size={16} style={{ color: c }} />
+                <span style={{ color: c }} className="text-sm font-semibold">{ind.label}</span>
               </div>
             </div>
 
             {/* CAPTURED */}
-            <div className="bg-[#05070a] border border-white/5 lg:border-[#00d4ff]/20 p-8 lg:p-10 flex flex-col justify-center">
+            <div className="bg-[#05070a] border border-white/5 p-8 lg:p-10 flex flex-col justify-center" style={{ borderColor: `${c}33` }}>
               <div className="flex items-center gap-2 mb-4">
-                <TrendingUp size={14} className="text-[#00d4ff]" />
-                <span className="text-[#00d4ff] text-xs font-bold tracking-[0.2em] uppercase">{ind.capturedLabel}</span>
+                <TrendingUp size={14} style={{ color: c }} />
+                <span style={{ color: c }} className="text-xs font-bold tracking-[0.2em] uppercase">{ind.capturedLabel}</span>
               </div>
-              <div className="font-mono text-4xl lg:text-5xl font-black text-[#00d4ff] mb-3 tracking-tight">
+              <div className="font-mono text-4xl lg:text-5xl font-black mb-3 tracking-tight" style={{ color: c }}>
                 {ind.capturedAmount}
               </div>
               <p className="text-[#a0aab5]/60 text-sm font-light">{ind.capturedDetail}</p>
@@ -603,7 +609,7 @@ function RevenueImpact() {
               </div>
               <div>
                 <span className="text-[#a0aab5]/50 text-xs font-bold tracking-[0.2em] uppercase block mb-2">Annual Impact</span>
-                <span className="font-mono text-3xl lg:text-4xl font-black text-[#00d4ff] tracking-tight">{ind.annual}</span>
+                <span className="font-mono text-3xl lg:text-4xl font-black tracking-tight" style={{ color: c }}>{ind.annual}</span>
               </div>
               <div className="sm:col-span-2">
                 <p className="text-[#a0aab5] text-base font-light italic leading-relaxed">
@@ -617,7 +623,8 @@ function RevenueImpact() {
           <div className="mt-8 flex justify-center">
             <a
               href="#contact"
-              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-[#00d4ff] text-[#05070a] font-bold text-sm tracking-wide uppercase hover:bg-[#00b8e0] transition-colors duration-300"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 text-[#05070a] font-bold text-sm tracking-wide uppercase transition-colors duration-300"
+              style={{ backgroundColor: c }}
             >
               Calculate Your Revenue Impact <ArrowRight size={18} />
             </a>
