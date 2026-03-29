@@ -345,7 +345,7 @@ function HowItWorks() {
 /* ─── Features Section ─── */
 function Features() {
   const features = [
-    { icon: MessageSquare, title: "AI Chat + SMS", desc: "Engage customers instantly on their preferred channel." },
+    { icon: MessageSquare, title: "AI Chat + SMS", desc: "Engage customers instantly in 20+ languages on their preferred channel." },
     { icon: PhoneMissed, title: "Missed Call Recovery", desc: "Never lose a lead to a missed call again." },
     { icon: Database, title: "CRM Auto-Logging", desc: "Every interaction captured without lifting a finger." },
     { icon: RefreshCw, title: "Automated Follow-Ups", desc: "Persistent, personalized outreach on autopilot." },
@@ -400,6 +400,7 @@ function AILayer() {
             <div className="space-y-5 mt-8">
               {[
                 "Natural, human-like conversations — not robotic scripts",
+                "Communicates in 20+ languages — reach every customer",
                 "Personalized responses based on customer context",
                 "Available 24/7 — nights, weekends, holidays",
                 "Learns and improves with every interaction",

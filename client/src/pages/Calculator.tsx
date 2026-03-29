@@ -17,6 +17,12 @@ import {
   DollarSign,
   MapPin,
   BarChart3,
+  User,
+  Mail,
+  Phone,
+  Briefcase,
+  CheckCircle2,
+  Send,
 } from "lucide-react";
 import { Link } from "wouter";
 
@@ -84,6 +90,18 @@ export default function Calculator() {
   const [locations, setLocations] = useState(1);
   const [dailyMetric, setDailyMetric] = useState(industryOptions[0].defaultDaily);
   const [avgUpsell, setAvgUpsell] = useState(industryOptions[0].avgUpsell);
+
+  // Lead capture form state
+  const [showForm, setShowForm] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", company: "" });
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // In production, this would POST to an API
+    console.log("Lead captured:", { ...formData, industry: ind.label, locations, netMonthly, netAnnual });
+    setFormSubmitted(true);
+  };
 
   const ind = industryOptions[industry];
   const Icon = ind.icon;
@@ -320,20 +338,112 @@ export default function Calculator() {
                   </div>
                 </div>
 
-                {/* CTA */}
-                <a
-                  href="mailto:hello@revenuerelaysystems.com?subject=Revenue%20Impact%20Inquiry"
-                  className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#00d4ff] text-[#05070a] font-bold text-sm tracking-wide uppercase hover:bg-[#00b8e0] transition-colors duration-300"
-                >
-                  Get Started Today <ArrowRight size={18} />
-                </a>
+                {/* CTA / Lead Form */}
+                {formSubmitted ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="bg-[#00d4ff]/10 border border-[#00d4ff]/30 p-6 text-center"
+                  >
+                    <CheckCircle2 size={36} className="text-[#00d4ff] mx-auto mb-3" />
+                    <h4 className="text-white font-bold text-lg mb-2">We'll Be in Touch!</h4>
+                    <p className="text-[#a0aab5] text-sm">Our team will reach out within 24 hours with a personalized revenue strategy for your business.</p>
+                    <Link
+                      href="/pricing"
+                      className="w-full inline-flex items-center justify-center gap-2 px-8 py-3 mt-4 border border-white/10 text-[#a0aab5] font-bold text-xs tracking-wide uppercase hover:border-white/20 hover:text-white transition-all duration-300"
+                    >
+                      View Pricing Plans <ArrowRight size={16} />
+                    </Link>
+                  </motion.div>
+                ) : !showForm ? (
+                  <>
+                    <button
+                      onClick={() => setShowForm(true)}
+                      className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#00d4ff] text-[#05070a] font-bold text-sm tracking-wide uppercase hover:bg-[#00b8e0] transition-colors duration-300"
+                    >
+                      Get Your Custom Report <Send size={18} />
+                    </button>
+                    <Link
+                      href="/pricing"
+                      className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 mt-3 border border-white/10 text-[#a0aab5] font-bold text-sm tracking-wide uppercase hover:border-white/20 hover:text-white transition-all duration-300"
+                    >
+                      View Pricing Plans <ArrowRight size={18} />
+                    </Link>
+                  </>
+                ) : (
+                  <motion.form
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    onSubmit={handleFormSubmit}
+                    className="space-y-4"
+                  >
+                    <p className="text-white font-bold text-sm uppercase tracking-wide mb-1">Get Your Personalized Report</p>
+                    <p className="text-[#a0aab5]/60 text-xs mb-4">We'll send a detailed breakdown tailored to your business.</p>
 
-                <Link
-                  href="/pricing"
-                  className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 mt-3 border border-white/10 text-[#a0aab5] font-bold text-sm tracking-wide uppercase hover:border-white/20 hover:text-white transition-all duration-300"
-                >
-                  View Pricing Plans <ArrowRight size={18} />
-                </Link>
+                    <div className="relative">
+                      <User size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#a0aab5]/40" />
+                      <input
+                        type="text"
+                        required
+                        placeholder="Full Name"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className="w-full bg-[#05070a] border border-white/10 text-white py-3 pl-10 pr-4 text-sm placeholder:text-[#a0aab5]/30 focus:border-[#00d4ff] focus:outline-none transition-colors"
+                      />
+                    </div>
+
+                    <div className="relative">
+                      <Mail size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#a0aab5]/40" />
+                      <input
+                        type="email"
+                        required
+                        placeholder="Work Email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full bg-[#05070a] border border-white/10 text-white py-3 pl-10 pr-4 text-sm placeholder:text-[#a0aab5]/30 focus:border-[#00d4ff] focus:outline-none transition-colors"
+                      />
+                    </div>
+
+                    <div className="relative">
+                      <Phone size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#a0aab5]/40" />
+                      <input
+                        type="tel"
+                        placeholder="Phone (optional)"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full bg-[#05070a] border border-white/10 text-white py-3 pl-10 pr-4 text-sm placeholder:text-[#a0aab5]/30 focus:border-[#00d4ff] focus:outline-none transition-colors"
+                      />
+                    </div>
+
+                    <div className="relative">
+                      <Briefcase size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#a0aab5]/40" />
+                      <input
+                        type="text"
+                        required
+                        placeholder="Company Name"
+                        value={formData.company}
+                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                        className="w-full bg-[#05070a] border border-white/10 text-white py-3 pl-10 pr-4 text-sm placeholder:text-[#a0aab5]/30 focus:border-[#00d4ff] focus:outline-none transition-colors"
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#00d4ff] text-[#05070a] font-bold text-sm tracking-wide uppercase hover:bg-[#00b8e0] transition-colors duration-300"
+                    >
+                      Send My Report <Send size={18} />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setShowForm(false)}
+                      className="w-full text-[#a0aab5]/40 text-xs hover:text-[#a0aab5] transition-colors text-center pt-1"
+                    >
+                      Back to results
+                    </button>
+                  </motion.form>
+                )}
               </div>
             </motion.div>
           </div>
