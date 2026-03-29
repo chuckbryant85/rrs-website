@@ -23,6 +23,12 @@ import {
   ChevronDown,
   Menu,
   X,
+  ShoppingCart,
+  Building2,
+  Wrench,
+  Landmark,
+  TrendingUp,
+  AlertTriangle,
 } from "lucide-react";
 
 // CDN URLs
@@ -427,114 +433,181 @@ function AILayer() {
   );
 }
 
-/* ─── Results Section ─── */
-function Results() {
-  const metrics = [
-    { prefix: "+", number: 35, suffix: "%", label: "Higher Conversion Rates" },
-    { prefix: "", number: 100, suffix: "x", label: "Faster Response Time" },
-    { prefix: "+", number: 29, suffix: "%", label: "Revenue Increase" },
-    { prefix: "", number: 245, suffix: "%", label: "Return on Investment" },
-  ];
+/* ─── Revenue Impact Calculator Section ─── */
+const industries = [
+  {
+    icon: ShoppingCart,
+    label: "Retail / Grocery",
+    lostLabel: "LOST DAILY",
+    lostAmount: "$10,000",
+    lostDetail: "500 customers × $20 missed upsell per cart",
+    capturedLabel: "CAPTURED DAILY",
+    capturedAmount: "$10,000",
+    capturedDetail: "AI-assisted carts: $65–$80 vs $45 avg",
+    monthly: "$300,000+",
+    annual: "$3.6M+",
+    quote: "By guiding customers from intent to full carts, RRS increases basket size automatically.",
+  },
+  {
+    icon: Building2,
+    label: "Hospitality",
+    lostLabel: "MISSED DAILY",
+    lostAmount: "$15,000",
+    lostDetail: "100 rooms × $150 in missed upsells per guest",
+    capturedLabel: "CAPTURED DAILY",
+    capturedAmount: "$15,000",
+    capturedDetail: "AI concierge: $150–$400 extras per guest",
+    monthly: "$450,000+",
+    annual: "$5M+",
+    quote: "Every guest interaction becomes a revenue opportunity.",
+  },
+  {
+    icon: Wrench,
+    label: "HVAC / Plumbing",
+    lostLabel: "LOST DAILY",
+    lostAmount: "$4,000",
+    lostDetail: "10 missed calls × $400 avg job value",
+    capturedLabel: "RECOVERED DAILY",
+    capturedAmount: "$3,200",
+    capturedDetail: "80% of missed leads captured by RRS",
+    monthly: "$96,000+",
+    annual: "$1.1M+",
+    quote: "Every missed call is revenue. RRS makes sure none slip through.",
+  },
+  {
+    icon: Landmark,
+    label: "Municipalities",
+    lostLabel: "WASTED DAILY",
+    lostAmount: "$10,000",
+    lostDetail: "1,000 requests × $5–$12 per call center request",
+    capturedLabel: "SAVED DAILY",
+    capturedAmount: "$9,000",
+    capturedDetail: "AI-handled requests: <$1 each",
+    monthly: "$120,000+",
+    annual: "$1.4M+",
+    quote: "Reduce costs while improving citizen satisfaction.",
+  },
+];
+
+function RevenueImpact() {
+  const [active, setActive] = useState(0);
+  const ind = industries[active];
+  const Icon = ind.icon;
 
   return (
-    <Section id="results" className="py-28 lg:py-40">
+    <Section id="results" className="py-28 lg:py-40 bg-[#0a0e1a]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="max-w-2xl mb-16">
-          <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase mb-4">Revenue Impact</p>
+        {/* Header */}
+        <div className="max-w-3xl mb-12">
+          <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase mb-4">What This Means in Dollars</p>
           <h2 className="text-4xl lg:text-[3.5rem] font-black text-white leading-[1.05] tracking-[-0.02em]">
-            The Numbers Speak<br />for Themselves.
+            Missed Revenue →<br /><span className="text-[#00d4ff]">Captured Revenue.</span>
           </h2>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12">
-          {metrics.map((m, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="border-l-2 border-[#00d4ff]/20 pl-6"
-            >
-              <div className="stat-number text-5xl lg:text-6xl mb-3">
-                <AnimatedCounter end={m.number} suffix={m.suffix} prefix={m.prefix} />
+        {/* Industry Tabs */}
+        <div className="flex flex-wrap gap-3 mb-14">
+          {industries.map((item, i) => {
+            const TabIcon = item.icon;
+            return (
+              <button
+                key={i}
+                onClick={() => setActive(i)}
+                className={`flex items-center gap-2 px-5 py-3 text-sm font-semibold tracking-wide uppercase transition-all duration-300 border ${
+                  active === i
+                    ? "border-[#00d4ff] text-[#00d4ff] bg-[#00d4ff]/5"
+                    : "border-white/10 text-[#a0aab5] hover:border-white/20 hover:text-white"
+                }`}
+              >
+                <TabIcon size={16} />
+                {item.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Calculator Card */}
+        <motion.div
+          key={active}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          {/* Main Calculator Grid */}
+          <div className="grid lg:grid-cols-3 gap-0">
+            {/* LOST */}
+            <div className="bg-[#05070a] border border-white/5 p-8 lg:p-10 flex flex-col justify-center">
+              <div className="flex items-center gap-2 mb-4">
+                <AlertTriangle size={14} className="text-red-500/70" />
+                <span className="text-red-500/70 text-xs font-bold tracking-[0.2em] uppercase">{ind.lostLabel}</span>
               </div>
-              <p className="text-[#a0aab5] text-sm font-medium uppercase tracking-wide">{m.label}</p>
-            </motion.div>
-          ))}
-        </div>
+              <div className="font-mono text-4xl lg:text-5xl font-black text-red-400/80 mb-3 tracking-tight">
+                {ind.lostAmount}
+              </div>
+              <p className="text-[#a0aab5]/60 text-sm font-light">{ind.lostDetail}</p>
+            </div>
+
+            {/* ARROW / TRANSITION */}
+            <div className="bg-[#05070a] border-y border-white/5 lg:border lg:border-[#00d4ff]/20 p-8 lg:p-10 flex flex-col items-center justify-center">
+              <div className="text-[#00d4ff] mb-4">
+                <ArrowRight size={32} className="hidden lg:block" />
+                <ChevronDown size={32} className="lg:hidden" />
+              </div>
+              <span className="text-white font-black text-lg tracking-wide uppercase">With RRS</span>
+              <div className="flex items-center gap-2 mt-2">
+                <Icon size={16} className="text-[#00d4ff]" />
+                <span className="text-[#00d4ff] text-sm font-semibold">{ind.label}</span>
+              </div>
+            </div>
+
+            {/* CAPTURED */}
+            <div className="bg-[#05070a] border border-white/5 lg:border-[#00d4ff]/20 p-8 lg:p-10 flex flex-col justify-center">
+              <div className="flex items-center gap-2 mb-4">
+                <TrendingUp size={14} className="text-[#00d4ff]" />
+                <span className="text-[#00d4ff] text-xs font-bold tracking-[0.2em] uppercase">{ind.capturedLabel}</span>
+              </div>
+              <div className="font-mono text-4xl lg:text-5xl font-black text-[#00d4ff] mb-3 tracking-tight">
+                {ind.capturedAmount}
+              </div>
+              <p className="text-[#a0aab5]/60 text-sm font-light">{ind.capturedDetail}</p>
+            </div>
+          </div>
+
+          {/* Impact Bar */}
+          <div className="bg-[#05070a] border border-t-0 border-white/5 p-8 lg:p-10">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 items-center">
+              <div>
+                <span className="text-[#a0aab5]/50 text-xs font-bold tracking-[0.2em] uppercase block mb-2">Monthly Impact</span>
+                <span className="font-mono text-3xl lg:text-4xl font-black text-white tracking-tight">{ind.monthly}</span>
+              </div>
+              <div>
+                <span className="text-[#a0aab5]/50 text-xs font-bold tracking-[0.2em] uppercase block mb-2">Annual Impact</span>
+                <span className="font-mono text-3xl lg:text-4xl font-black text-[#00d4ff] tracking-tight">{ind.annual}</span>
+              </div>
+              <div className="sm:col-span-2">
+                <p className="text-[#a0aab5] text-base font-light italic leading-relaxed">
+                  "{ind.quote}"
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA Button */}
+          <div className="mt-8 flex justify-center">
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-[#00d4ff] text-[#05070a] font-bold text-sm tracking-wide uppercase hover:bg-[#00b8e0] transition-colors duration-300"
+            >
+              Calculate Your Revenue Impact <ArrowRight size={18} />
+            </a>
+          </div>
+        </motion.div>
       </div>
     </Section>
   );
 }
 
-/* ─── Use Cases Section ─── */
-function UseCases() {
-  return (
-    <Section className="py-28 lg:py-40 bg-[#0a0e1a]">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase mb-4">Use Cases</p>
-        <h2 className="text-4xl lg:text-[3.5rem] font-black text-white leading-[1.05] tracking-[-0.02em] mb-16">
-          See It in Action.
-        </h2>
-
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Retail */}
-          <div className="border border-white/5 p-8 lg:p-10">
-            <span className="text-[#00d4ff] text-xs font-bold tracking-[0.2em] uppercase">Retail</span>
-            <h3 className="text-white text-2xl font-bold mt-3 mb-4">AI That Sells</h3>
-            <div className="bg-[#05070a] border border-white/5 p-5 mb-6">
-              <p className="text-[#a0aab5] text-sm font-light italic">
-                "I need to make lasagna for 6 people."
-              </p>
-            </div>
-            <div className="space-y-3">
-              {[
-                "AI builds a complete shopping cart instantly",
-                "Suggests add-ons: garlic bread, wine, dessert",
-                "Order placed in under 2 minutes",
-              ].map((item, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <CheckCircle2 size={16} className="text-[#00d4ff] mt-0.5 shrink-0" />
-                  <span className="text-[#a0aab5] text-sm font-light">{item}</span>
-                </div>
-              ))}
-            </div>
-            <p className="text-white font-semibold text-sm mt-6">
-              Result: Bigger baskets. Higher order values. Happier customers.
-            </p>
-          </div>
-
-          {/* Service */}
-          <div className="border border-white/5 p-8 lg:p-10">
-            <span className="text-[#00d4ff] text-xs font-bold tracking-[0.2em] uppercase">Service</span>
-            <h3 className="text-white text-2xl font-bold mt-3 mb-4">No Call Left Behind</h3>
-            <div className="bg-[#05070a] border border-white/5 p-5 mb-6">
-              <p className="text-[#a0aab5] text-sm font-light italic">
-                Customer calls your plumbing company at 8 PM. No one answers.
-              </p>
-            </div>
-            <div className="space-y-3">
-              {[
-                "Instant SMS: \"Sorry we missed you! How can we help?\"",
-                "AI engages the customer in conversation",
-                "Appointment booked for the next morning — automatically",
-              ].map((item, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <CheckCircle2 size={16} className="text-[#00d4ff] mt-0.5 shrink-0" />
-                  <span className="text-[#a0aab5] text-sm font-light">{item}</span>
-                </div>
-              ))}
-            </div>
-            <p className="text-white font-semibold text-sm mt-6">
-              Result: Zero lost leads. Booked calendar. Revenue captured 24/7.
-            </p>
-          </div>
-        </div>
-      </div>
-    </Section>
-  );
-}
+/* UseCases removed — replaced by RevenueImpact calculator above */
 
 /* ─── Why RRS Section ─── */
 function WhyRRS() {
@@ -740,9 +813,7 @@ export default function Home() {
       <RelayLine />
       <AILayer />
       <RelayLine />
-      <Results />
-      <RelayLine />
-      <UseCases />
+      <RevenueImpact />
       <RelayLine />
       <WhyRRS />
       <RelayLine />
