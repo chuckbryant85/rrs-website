@@ -121,6 +121,8 @@ function Nav() {
     { label: "Results", href: "#results" },
     { label: "Team", href: "#team" },
     { label: "Contact", href: "#contact" },
+    { label: "Pricing", href: "/pricing" },
+    { label: "Calculator", href: "/calculator" },
   ];
 
   return (
