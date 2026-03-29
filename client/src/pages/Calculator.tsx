@@ -80,6 +80,7 @@ const industryOptions = [
 ];
 
 function formatCurrency(n: number): string {
+  if (n >= 1_000_000_000) return `$${(n / 1_000_000_000).toFixed(1)}B`;
   if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`;
   if (n >= 1_000) return `$${Math.round(n).toLocaleString()}`;
   return `$${Math.round(n)}`;
@@ -212,7 +213,7 @@ export default function Calculator() {
                   <input
                     type="range"
                     min={1}
-                    max={50}
+                    max={10000}
                     value={locations}
                     onChange={(e) => setLocations(Number(e.target.value))}
                     className="w-full accent-[#00d4ff] mb-2"
@@ -221,9 +222,9 @@ export default function Calculator() {
                     <input
                       type="number"
                       min={1}
-                      max={500}
+                      max={10000}
                       value={locations}
-                      onChange={(e) => setLocations(Math.max(1, Number(e.target.value)))}
+                      onChange={(e) => setLocations(Math.max(1, Math.min(10000, Number(e.target.value))))}
                       className="w-20 bg-[#05070a] border border-white/10 text-white text-center py-2 font-mono text-lg focus:border-[#00d4ff] focus:outline-none transition-colors"
                     />
                     <span className="text-[#a0aab5]/50 text-xs">location{locations > 1 ? "s" : ""}</span>
