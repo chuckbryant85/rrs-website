@@ -46,11 +46,14 @@ const STEPHANIE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/
 /* ─── Animated Counter ─── */
 function AnimatedCounter({ end, suffix = "", prefix = "", duration = 2000 }: { end: number; suffix?: string; prefix?: string; duration?: number }) {
   const [count, setCount] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   useEffect(() => {
+    if (hasAnimated) return;
     if (!isInView) return;
+    setHasAnimated(true);
     let start = 0;
     const increment = end / (duration / 16);
     const timer = setInterval(() => {
@@ -63,7 +66,18 @@ function AnimatedCounter({ end, suffix = "", prefix = "", duration = 2000 }: { e
       }
     }, 16);
     return () => clearInterval(timer);
-  }, [isInView, end, duration]);
+  }, [isInView, end, duration, hasAnimated]);
+
+  // Fallback: if after 4 seconds the animation hasn't fired, show the real number
+  useEffect(() => {
+    const fallback = setTimeout(() => {
+      if (!hasAnimated) {
+        setCount(end);
+        setHasAnimated(true);
+      }
+    }, 4000);
+    return () => clearTimeout(fallback);
+  }, [end, hasAnimated]);
 
   return <span ref={ref}>{prefix}{count}{suffix}</span>;
 }
@@ -71,7 +85,7 @@ function AnimatedCounter({ end, suffix = "", prefix = "", duration = 2000 }: { e
 /* ─── Section Wrapper with fade-in ─── */
 function Section({ children, className = "", id = "" }: { children: React.ReactNode; className?: string; id?: string }) {
   const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: true, amount: 0.05 });
 
   return (
     <motion.section
