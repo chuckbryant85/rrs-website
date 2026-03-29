@@ -45,39 +45,47 @@ const STEPHANIE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/
 
 /* ─── Animated Counter ─── */
 function AnimatedCounter({ end, suffix = "", prefix = "", duration = 2000 }: { end: number; suffix?: string; prefix?: string; duration?: number }) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(end); // Start with real number as default
   const [hasAnimated, setHasAnimated] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   useEffect(() => {
-    if (hasAnimated) return;
-    if (!isInView) return;
-    setHasAnimated(true);
-    let start = 0;
-    const increment = end / (duration / 16);
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= end) {
-        setCount(end);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(start));
-      }
-    }, 16);
-    return () => clearInterval(timer);
-  }, [isInView, end, duration, hasAnimated]);
+    const el = ref.current;
+    if (!el || hasAnimated) return;
 
-  // Fallback: if after 4 seconds the animation hasn't fired, show the real number
-  useEffect(() => {
-    const fallback = setTimeout(() => {
-      if (!hasAnimated) {
-        setCount(end);
-        setHasAnimated(true);
-      }
-    }, 4000);
-    return () => clearTimeout(fallback);
-  }, [end, hasAnimated]);
+    // Use native IntersectionObserver — works reliably on mobile Safari
+    if (typeof IntersectionObserver === 'undefined') {
+      // No IO support — just show the number
+      setCount(end);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+          observer.disconnect();
+          // Animate from 0 to end
+          setCount(0);
+          let start = 0;
+          const increment = end / (duration / 16);
+          const timer = setInterval(() => {
+            start += increment;
+            if (start >= end) {
+              setCount(end);
+              clearInterval(timer);
+            } else {
+              setCount(Math.floor(start));
+            }
+          }, 16);
+        }
+      },
+      { threshold: 0, rootMargin: '0px' }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [end, duration, hasAnimated]);
 
   return <span ref={ref}>{prefix}{count}{suffix}</span>;
 }
