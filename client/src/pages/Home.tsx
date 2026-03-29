@@ -31,6 +31,12 @@ const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYW
 const DASHBOARD_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/dashboard_mockup-L4YMtWk7ihCevE8W5xRSuG.webp";
 const MOBILE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/mobile_chat-924frS6Jh5zgkEafDqUweX.webp";
 
+// Team Headshots
+const CHUCK_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/chuck_headshot_cc9c5ae5.jpg";
+const DARIUS_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/darius_headshot_b8b97158.jpg";
+const LARRY_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/larry_headshot_7676779a.jpg";
+const STEPHANIE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/stephanie_headshot_19786506.jpg";
+
 /* ─── Animated Counter ─── */
 function AnimatedCounter({ end, suffix = "", prefix = "", duration = 2000 }: { end: number; suffix?: string; prefix?: string; duration?: number }) {
   const [count, setCount] = useState(0);
@@ -107,6 +113,7 @@ function Nav() {
     { label: "Solution", href: "#solution" },
     { label: "Features", href: "#features" },
     { label: "Results", href: "#results" },
+    { label: "Team", href: "#team" },
     { label: "Contact", href: "#contact" },
   ];
 
@@ -585,6 +592,93 @@ function WhyRRS() {
   );
 }
 
+/* ─── Team Section ─── */
+function Team() {
+  const team = [
+    {
+      name: "Chuck Bryant Jr.",
+      title: "CEO & Founder",
+      bio: "20+ years in technology, private equity, and business operations. Visionary leader driving RRS from concept to market.",
+      img: CHUCK_IMG,
+      linkedin: "https://www.linkedin.com/in/chuck-bryant-jr-86539564/",
+    },
+    {
+      name: "Darius Miller",
+      title: "Strategic Advisor",
+      bio: "Former professional athlete turned entrepreneur and investor. Brings elite-level discipline and a winning mindset to every venture.",
+      img: DARIUS_IMG,
+    },
+    {
+      name: "Larry Drew II",
+      title: "Strategic Advisor",
+      bio: "Accomplished athlete and business strategist with deep expertise in brand building, partnerships, and high-performance team culture.",
+      img: LARRY_IMG,
+    },
+    {
+      name: "Stephanie Arakel",
+      title: "Head of Marketing & Brand",
+      bio: "Award-winning marketing executive specializing in brand strategy, customer acquisition, and high-impact digital campaigns.",
+      img: STEPHANIE_IMG,
+    },
+  ];
+
+  return (
+    <Section id="team" className="py-28 lg:py-40">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="mb-16 lg:mb-20">
+          <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase mb-4">Leadership</p>
+          <h2 className="text-4xl lg:text-[3.5rem] font-black text-white leading-[1.05] tracking-[-0.02em]">
+            The Team Behind<br />the Engine.
+          </h2>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+          {team.map((member, i) => (
+            <motion.div
+              key={member.name}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="group"
+            >
+              {/* Headshot */}
+              <div className="relative mb-6 overflow-hidden">
+                <div className="aspect-square overflow-hidden">
+                  <img
+                    src={member.img}
+                    alt={member.name}
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                  />
+                </div>
+                {/* Blue accent bar at bottom of image */}
+                <div className="absolute bottom-0 left-0 w-full h-[3px] bg-[#00d4ff] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+              </div>
+
+              {/* Info */}
+              <h3 className="text-white font-bold text-lg mb-1">{member.name}</h3>
+              <p className="text-[#00d4ff] text-sm font-semibold tracking-wide uppercase mb-3">{member.title}</p>
+              <p className="text-[#a0aab5] text-sm font-light leading-relaxed mb-4">{member.bio}</p>
+
+              {member.linkedin && (
+                <a
+                  href={member.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-[#a0aab5] hover:text-[#00d4ff] text-xs font-medium tracking-wide uppercase transition-colors duration-200"
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                  LinkedIn
+                </a>
+              )}
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </Section>
+  );
+}
+
 /* ─── CTA Section ─── */
 function CTA() {
   return (
@@ -651,6 +745,8 @@ export default function Home() {
       <UseCases />
       <RelayLine />
       <WhyRRS />
+      <RelayLine />
+      <Team />
       <RelayLine />
       <CTA />
       <Footer />
