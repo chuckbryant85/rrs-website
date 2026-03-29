@@ -40,7 +40,7 @@ const MOBILE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXX
 // Team Headshots
 const CHUCK_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/chuck_headshot_cc9c5ae5.jpg";
 const DARIUS_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/darius_headshot_b8b97158.jpg";
-const LARRY_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/larry_headshot_7676779a.jpg";
+const LARRY_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/larry_drew_headshot_0722cdb2.png";
 const STEPHANIE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/stephanie_headshot_19786506.jpg";
 
 /* ─── Animated Counter ─── */
