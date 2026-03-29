@@ -597,26 +597,26 @@ function Team() {
   const team = [
     {
       name: "Chuck Bryant Jr.",
-      title: "CEO & Founder",
+      title: "Founder & Principal",
       bio: "20+ years in technology, private equity, and business operations. Visionary leader driving RRS from concept to market.",
       img: CHUCK_IMG,
       linkedin: "https://www.linkedin.com/in/chuck-bryant-jr-86539564/",
     },
     {
       name: "Darius Miller",
-      title: "Strategic Advisor",
+      title: "Principal, Strategic Partnerships",
       bio: "Former professional athlete turned entrepreneur and investor. Brings elite-level discipline and a winning mindset to every venture.",
       img: DARIUS_IMG,
     },
     {
       name: "Larry Drew II",
-      title: "Strategic Advisor",
+      title: "Principal, Business Development",
       bio: "Accomplished athlete and business strategist with deep expertise in brand building, partnerships, and high-performance team culture.",
       img: LARRY_IMG,
     },
     {
       name: "Stephanie Arakel",
-      title: "Head of Marketing & Brand",
+      title: "Principal, Brand & Growth",
       bio: "Award-winning marketing executive specializing in brand strategy, customer acquisition, and high-impact digital campaigns.",
       img: STEPHANIE_IMG,
     },
