@@ -42,6 +42,7 @@ const CHUCK_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXx
 const DARIUS_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/darius_headshot_b8b97158.jpg";
 const LARRY_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/larry_drew_headshot_0722cdb2.png";
 const STEPHANIE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/stephanie_headshot_19786506.jpg";
+const TROY_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/troy_lemond_headshot_b1073e35.png";
 
 /* ─── Animated Counter ─── */
 function AnimatedCounter({ end, suffix = "", prefix = "", duration = 2000 }: { end: number; suffix?: string; prefix?: string; duration?: number }) {
@@ -721,6 +722,12 @@ function Team() {
       bio: "Award-winning marketing executive specializing in brand strategy, customer acquisition, and high-impact digital campaigns.",
       img: STEPHANIE_IMG,
     },
+    {
+      name: "Troy Lemond",
+      title: "Principal, Strategic Alliances",
+      bio: "Legendary network builder and relationship strategist. Architects the key alliances that power RRS's product ecosystem and market reach.",
+      img: TROY_IMG,
+    },
   ];
 
   return (
@@ -733,7 +740,7 @@ function Team() {
           </h2>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-10">
           {team.map((member, i) => (
             <motion.div
               key={member.name}
