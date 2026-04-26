@@ -1,6 +1,6 @@
 /**
  * RRS Pricing Page
- * Based on goalsapp.ai pricing structure + 1-2% agent fee on assisted checkouts
+ * Tech Development & Integrations service tiers for SMBs
  */
 
 import { motion } from "framer-motion";
@@ -17,86 +17,71 @@ const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxY
 
 const plans = [
   {
-    name: "Professional",
+    name: "Launchpad",
     icon: Zap,
-    bestFor: "Single-location businesses",
-    price: "$497",
-    period: "/month",
-    annual: "$5,964/year (12-month contract)",
-    setup: "$1,500 one-time setup",
-    agentFee: "1% agent fee on assisted checkouts",
+    bestFor: "Small businesses ready to modernize",
+    price: "$5,000",
+    period: " starting",
+    annual: "One-time build + optional $500–$1,500/mo retainer",
+    setup: "",
     popular: false,
     whiteGlove: false,
     features: [
-      "24/7 AI across all channels",
-      "SMS, Web Chat, Voice, Social DMs",
-      "Multi-language support (20+ languages)",
-      "Automated booking & lead capture",
-      "Brand voice customization",
-      "Reservation system integrations",
-      "Review monitoring (3 platforms)",
-      "AI-powered review responses",
-      "Sentiment analysis & alerts",
-      "Monthly reputation reports",
-      "Onboarding & brand voice setup",
-      "Monthly optimization reviews",
-      "Quarterly strategy sessions",
-      "5,000 monthly conversations",
+      "Custom website design & development",
+      "Mobile-responsive, conversion-optimized",
+      "Stripe or payment gateway integration",
+      "Basic CRM setup & configuration",
+      "Contact forms & automated notifications",
+      "Google Analytics & SEO foundations",
+      "SSL, hosting, and domain setup",
+      "30-day post-launch support",
+      "Training & documentation",
     ],
   },
   {
-    name: "Enterprise",
+    name: "Growth Engine",
     icon: Star,
-    bestFor: "Multi-location operators & groups",
-    price: "$1,497",
-    period: "/month",
-    annual: "3 locations included",
-    setup: "$3,500 one-time setup",
-    agentFee: "1.5% agent fee on assisted checkouts",
+    bestFor: "Scaling businesses that need integrated systems",
+    price: "$15,000",
+    period: " starting",
+    annual: "One-time build + $2,000–$5,000/mo retainer",
+    setup: "",
     popular: true,
     whiteGlove: false,
-    extra: "+$397/mo per additional location",
-    examples: [
-      "3 locations: $1,497/mo",
-      "5 locations: $2,291/mo",
-      "10 locations: $4,467/mo",
-    ],
     features: [
-      "Everything in Professional, plus:",
-      "Multi-location dashboard",
-      "Cross-location analytics",
-      "Advanced routing & escalation",
-      "Unlimited review responses (all platforms)",
-      "Review generation campaigns",
-      "Custom workflows & automation",
-      "Dedicated Success Manager",
-      "4-hour response SLA",
-      "Monthly strategy calls",
-      "Quarterly business reviews",
-      "15,000 monthly conversations",
+      "Everything in Launchpad, plus:",
+      "Custom workflow automation",
+      "Advanced CRM with pipeline management",
+      "Client portal with self-service access",
+      "Multi-system integrations (APIs, Zapier, custom)",
+      "Automated invoicing & payment collection",
+      "Custom dashboards & reporting",
+      "Dedicated project manager",
+      "60-day post-launch support",
+      "Priority response SLA",
     ],
   },
   {
-    name: "Portfolio",
+    name: "Enterprise Build",
     icon: Crown,
-    bestFor: "National brands & PE-backed portfolios (10+)",
+    bestFor: "Complex operations needing full digital transformation",
     price: "Custom",
     period: "",
-    annual: "Starting at $5,000–$15,000/mo",
-    setup: "$10,000+ one-time setup",
-    agentFee: "2% agent fee on assisted checkouts",
+    annual: "Starting at $50,000+ for full buildout",
+    setup: "",
     popular: false,
     whiteGlove: true,
     features: [
-      "Everything in Enterprise, plus:",
-      "Custom integrations & API access",
-      "White-glove success team",
-      "Crisis management protocols",
+      "Everything in Growth Engine, plus:",
+      "Full digital infrastructure architecture",
+      "Custom application development",
+      "Advanced automation & AI integrations",
+      "Multi-department workflow systems",
       "Executive dashboards & board reporting",
-      "24/7 emergency support (1-hr SLA)",
-      "Multi-brand management",
+      "Ongoing optimization & scaling",
+      "Dedicated success team",
+      "24/7 priority support",
       "Custom SLA guarantees",
-      "Unlimited conversations",
     ],
   },
 ];
@@ -116,7 +101,7 @@ export default function Pricing() {
           </Link>
           <div className="flex items-center gap-4">
             <Link href="/calculator" className="text-[#a0aab5] hover:text-white text-sm font-medium tracking-wide uppercase transition-colors">
-              Calculator
+              ROI Calculator
             </Link>
             <Link href="/" className="text-[#a0aab5] hover:text-white text-sm font-medium tracking-wide uppercase transition-colors">
               Home
@@ -135,22 +120,22 @@ export default function Pricing() {
           >
             <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase mb-4">Pricing</p>
             <h1 className="text-4xl lg:text-[3.5rem] font-black text-white leading-[1.05] tracking-[-0.02em] mb-4">
-              Infrastructure That<br /><span className="text-[#00d4ff]">Pays for Itself.</span>
+              Technology That<br /><span className="text-[#00d4ff]">Pays for Itself.</span>
             </h1>
             <p className="text-[#a0aab5] text-lg font-light max-w-2xl mx-auto">
-              Simple pricing. Powerful infrastructure. Every plan includes a small agent fee on assisted checkouts — so we only win when you win.
+              Custom-built systems designed to eliminate inefficiency, automate operations, and accelerate growth. Every engagement is scoped to your business.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Agent Fee Callout */}
+      {/* Approach Callout */}
       <section className="pb-12 px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <div className="bg-[#00d4ff]/5 border border-[#00d4ff]/20 p-6 text-center">
-            <p className="text-[#00d4ff] text-sm font-bold tracking-wide uppercase mb-2">Performance-Aligned Pricing</p>
+            <p className="text-[#00d4ff] text-sm font-bold tracking-wide uppercase mb-2">Our Approach</p>
             <p className="text-[#a0aab5] text-sm font-light">
-              Every plan includes a <span className="text-white font-semibold">1–2% agent fee</span> on AI-assisted checkouts and conversions. This means our revenue is directly tied to yours — we only make money when we make <span className="text-white font-semibold">you</span> money.
+              Every project starts with a <span className="text-white font-semibold">discovery phase</span> to understand your operations, goals, and technical requirements. We scope, build, and deliver — then provide ongoing support to keep your systems running at peak performance.
             </p>
           </div>
         </div>
@@ -181,7 +166,7 @@ export default function Pricing() {
                   )}
                   {plan.whiteGlove && (
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-white/10 text-white text-xs font-black tracking-[0.15em] uppercase px-5 py-1.5">
-                      White-Glove
+                      Full Transformation
                     </div>
                   )}
 
@@ -199,35 +184,18 @@ export default function Pricing() {
                       <span className="text-[#a0aab5]/50 text-sm font-medium">{plan.period}</span>
                     </div>
                     <p className="text-[#a0aab5]/40 text-xs mt-1">{plan.annual}</p>
-                    {plan.extra && (
-                      <p className="text-[#00d4ff]/60 text-xs mt-1">{plan.extra}</p>
-                    )}
                   </div>
-
-                  <div className="bg-[#05070a] border border-white/5 p-4 mb-6">
-                    <p className="text-[#a0aab5]/50 text-xs mb-1">{plan.setup}</p>
-                    <p className="text-[#00d4ff] text-xs font-semibold">{plan.agentFee}</p>
-                  </div>
-
-                  {plan.examples && (
-                    <div className="mb-6">
-                      <p className="text-[#a0aab5]/40 text-xs font-bold tracking-[0.15em] uppercase mb-2">Examples</p>
-                      {plan.examples.map((ex, j) => (
-                        <p key={j} className="text-[#a0aab5]/60 text-xs font-mono">{ex}</p>
-                      ))}
-                    </div>
-                  )}
 
                   <div className="flex-1 mb-8">
                     <div className="space-y-3">
                       {plan.features.map((feat, j) => (
                         <div key={j} className="flex items-start gap-2">
-                          {j === 0 && plan.name !== "Professional" ? (
+                          {j === 0 && plan.name !== "Launchpad" ? (
                             <span className="text-[#00d4ff] text-xs font-bold mt-0.5">&mdash;</span>
                           ) : (
                             <Check size={14} className="text-[#00d4ff] mt-0.5 shrink-0" />
                           )}
-                          <span className={`text-sm font-light ${j === 0 && plan.name !== "Professional" ? "text-[#00d4ff] font-semibold" : "text-[#a0aab5]"}`}>
+                          <span className={`text-sm font-light ${j === 0 && plan.name !== "Launchpad" ? "text-[#00d4ff] font-semibold" : "text-[#a0aab5]"}`}>
                             {feat}
                           </span>
                         </div>
@@ -236,14 +204,14 @@ export default function Pricing() {
                   </div>
 
                   <a
-                    href="mailto:hello@revenuerelaysystems.com?subject=Pricing%20Inquiry%20-%20{plan.name}"
+                    href={`mailto:hello@revenuerelaysystems.com?subject=Pricing%20Inquiry%20-%20${plan.name}`}
                     className={`w-full inline-flex items-center justify-center gap-2 px-8 py-4 font-bold text-sm tracking-wide uppercase transition-colors duration-300 ${
                       plan.popular
                         ? "bg-[#00d4ff] text-[#05070a] hover:bg-[#00b8e0]"
                         : "border border-white/10 text-[#a0aab5] hover:border-[#00d4ff]/40 hover:text-white"
                     }`}
                   >
-                    {plan.name === "Portfolio" ? "Contact Us" : "Get Started"} <ArrowRight size={16} />
+                    {plan.name === "Enterprise Build" ? "Schedule a Call" : "Get Started"} <ArrowRight size={16} />
                   </a>
                 </motion.div>
               );
@@ -258,15 +226,15 @@ export default function Pricing() {
             className="mt-16 text-center"
           >
             <div className="bg-[#0a0e1a] border border-white/5 p-10 max-w-3xl mx-auto">
-              <h3 className="text-white font-bold text-2xl mb-3">Not sure which plan is right?</h3>
+              <h3 className="text-white font-bold text-2xl mb-3">Not sure where to start?</h3>
               <p className="text-[#a0aab5] text-sm font-light mb-6">
-                Use our Revenue Calculator to see exactly how much additional revenue RRS can capture for your business.
+                Use our ROI Calculator to see how much time and money your business can save with modern systems.
               </p>
               <Link
                 href="/calculator"
                 className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-[#00d4ff] text-[#05070a] font-bold text-sm tracking-wide uppercase hover:bg-[#00b8e0] transition-colors duration-300"
               >
-                Calculate Your Revenue Impact <ArrowRight size={18} />
+                Calculate Your ROI <ArrowRight size={18} />
               </Link>
             </div>
           </motion.div>

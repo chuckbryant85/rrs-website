@@ -1,21 +1,16 @@
 /**
- * RRS Revenue Impact Calculator
- * Interactive tool for prospects to calculate their potential revenue uplift
- * Includes 1-2% agent fee on assisted checkouts
+ * RRS Tech Modernization ROI Calculator
+ * Interactive tool for prospects to estimate operational savings
+ * from custom tech development & integrations
  */
 
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
-  ShoppingCart,
-  Building2,
-  Wrench,
-  Landmark,
   Calculator as CalcIcon,
   TrendingUp,
   DollarSign,
-  MapPin,
   BarChart3,
   User,
   Mail,
@@ -23,59 +18,67 @@ import {
   Briefcase,
   CheckCircle2,
   Send,
+  Globe,
+  Zap,
+  CreditCard,
+  Users,
+  Workflow,
+  Clock,
 } from "lucide-react";
 import { Link } from "wouter";
 
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/rrs_logo_cef58a2c.png";
 
-const industryOptions = [
+const serviceOptions = [
   {
-    key: "retail",
-    label: "Retail / Grocery",
-    icon: ShoppingCart,
-    avgUpsell: 20,
-    upsellLabel: "Avg upsell per customer ($)",
-    dailyMetricLabel: "Customers per day (per location)",
-    defaultDaily: 500,
-    captureRate: 0.85,
-    agentFeeRate: 0.015,
-    description: "AI-assisted carts increase basket size by $20–$35 per customer.",
+    key: "website",
+    label: "Website Development",
+    icon: Globe,
+    hoursSavedPerWeek: 10,
+    hoursLabel: "Hours saved per week on manual web updates",
+    costPerHour: 50,
+    defaultEmployees: 3,
+    description: "Replace outdated sites with conversion-optimized platforms that reduce manual upkeep.",
   },
   {
-    key: "hospitality",
-    label: "Hospitality",
-    icon: Building2,
-    avgUpsell: 150,
-    upsellLabel: "Avg upsell per guest ($)",
-    dailyMetricLabel: "Rooms per night (per location)",
-    defaultDaily: 100,
-    captureRate: 0.80,
-    agentFeeRate: 0.02,
-    description: "AI concierge drives $150–$400 in extras per guest interaction.",
+    key: "automation",
+    label: "Automation",
+    icon: Zap,
+    hoursSavedPerWeek: 20,
+    hoursLabel: "Hours saved per week on manual tasks",
+    costPerHour: 45,
+    defaultEmployees: 5,
+    description: "Eliminate repetitive workflows — data entry, follow-ups, scheduling, and reporting.",
   },
   {
-    key: "hvac",
-    label: "HVAC / Plumbing",
-    icon: Wrench,
-    avgUpsell: 400,
-    upsellLabel: "Avg job value ($)",
-    dailyMetricLabel: "Missed calls per day (per location)",
-    defaultDaily: 10,
-    captureRate: 0.80,
-    agentFeeRate: 0.01,
-    description: "Capture 80% of missed leads that would otherwise walk away.",
+    key: "payments",
+    label: "Payment Systems",
+    icon: CreditCard,
+    hoursSavedPerWeek: 15,
+    hoursLabel: "Hours saved per week on invoicing & collections",
+    costPerHour: 55,
+    defaultEmployees: 3,
+    description: "Stripe integrations that cut invoice cycles from 30-60 days to instant collection.",
   },
   {
-    key: "municipalities",
-    label: "Municipalities",
-    icon: Landmark,
-    avgUpsell: 8,
-    upsellLabel: "Avg cost savings per request ($)",
-    dailyMetricLabel: "Requests per day (per location)",
-    defaultDaily: 1000,
-    captureRate: 0.90,
-    agentFeeRate: 0.0,
-    description: "Reduce call center costs from $5–$12 per request to under $1.",
+    key: "crm",
+    label: "CRM Platform",
+    icon: Users,
+    hoursSavedPerWeek: 12,
+    hoursLabel: "Hours saved per week on client management",
+    costPerHour: 50,
+    defaultEmployees: 4,
+    description: "Centralize client data, automate follow-ups, and eliminate spreadsheet chaos.",
+  },
+  {
+    key: "workflows",
+    label: "Custom Workflows",
+    icon: Workflow,
+    hoursSavedPerWeek: 18,
+    hoursLabel: "Hours saved per week on manual processes",
+    costPerHour: 50,
+    defaultEmployees: 5,
+    description: "Purpose-built business processes that replace manual, error-prone operations.",
   },
 ];
 
@@ -87,38 +90,35 @@ function formatCurrency(n: number): string {
 }
 
 export default function Calculator() {
-  const [industry, setIndustry] = useState(0);
-  const [locations, setLocations] = useState(1);
-  const [dailyMetric, setDailyMetric] = useState(industryOptions[0].defaultDaily);
-  const [avgUpsell, setAvgUpsell] = useState(industryOptions[0].avgUpsell);
+  const [service, setService] = useState(0);
+  const [employees, setEmployees] = useState(serviceOptions[0].defaultEmployees);
+  const [hoursSaved, setHoursSaved] = useState(serviceOptions[0].hoursSavedPerWeek);
+  const [costPerHour, setCostPerHour] = useState(serviceOptions[0].costPerHour);
 
   // Lead capture form state
   const [showForm, setShowForm] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", company: "" });
 
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // In production, this would POST to an API
-    console.log("Lead captured:", { ...formData, industry: ind.label, locations, netMonthly, netAnnual });
-    setFormSubmitted(true);
+  const svc = serviceOptions[service];
+  const Icon = svc.icon;
+
+  const weeklySavings = hoursSaved * costPerHour * employees;
+  const monthlySavings = weeklySavings * 4.33;
+  const annualSavings = weeklySavings * 52;
+  const totalHoursAnnual = hoursSaved * employees * 52;
+
+  const handleServiceChange = (i: number) => {
+    setService(i);
+    setEmployees(serviceOptions[i].defaultEmployees);
+    setHoursSaved(serviceOptions[i].hoursSavedPerWeek);
+    setCostPerHour(serviceOptions[i].costPerHour);
   };
 
-  const ind = industryOptions[industry];
-  const Icon = ind.icon;
-
-  const dailyCaptured = dailyMetric * avgUpsell * ind.captureRate * locations;
-  const monthlyCaptured = dailyCaptured * 30;
-  const annualCaptured = dailyCaptured * 365;
-  const agentFeeMonthly = monthlyCaptured * ind.agentFeeRate;
-  const agentFeeAnnual = annualCaptured * ind.agentFeeRate;
-  const netMonthly = monthlyCaptured - agentFeeMonthly;
-  const netAnnual = annualCaptured - agentFeeAnnual;
-
-  const handleIndustryChange = (i: number) => {
-    setIndustry(i);
-    setDailyMetric(industryOptions[i].defaultDaily);
-    setAvgUpsell(industryOptions[i].avgUpsell);
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Lead captured:", { ...formData, service: svc.label, employees, monthlySavings, annualSavings });
+    setFormSubmitted(true);
   };
 
   return (
@@ -154,13 +154,13 @@ export default function Calculator() {
           >
             <div className="flex items-center gap-3 mb-4">
               <CalcIcon size={20} className="text-[#00d4ff]" />
-              <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase">Revenue Calculator</p>
+              <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase">ROI Calculator</p>
             </div>
             <h1 className="text-4xl lg:text-[3.5rem] font-black text-white leading-[1.05] tracking-[-0.02em] mb-4">
-              Calculate Your<br /><span className="text-[#00d4ff]">Revenue Impact.</span>
+              Calculate Your<br /><span className="text-[#00d4ff]">Efficiency Gains.</span>
             </h1>
             <p className="text-[#a0aab5] text-lg font-light max-w-2xl">
-              Enter your business details below to see how much additional revenue RRS can capture for you every month.
+              See how much time and money your business can save by modernizing operations with custom-built technology.
             </p>
           </motion.div>
         </div>
@@ -179,18 +179,18 @@ export default function Calculator() {
               <div className="bg-[#0a0e1a] border border-white/5 p-8 lg:p-10">
                 <h3 className="text-white font-bold text-lg mb-8 uppercase tracking-wide">Your Business Details</h3>
 
-                {/* Industry Selection */}
+                {/* Service Selection */}
                 <div className="mb-8">
-                  <label className="text-[#a0aab5] text-xs font-bold tracking-[0.15em] uppercase block mb-3">Industry</label>
+                  <label className="text-[#a0aab5] text-xs font-bold tracking-[0.15em] uppercase block mb-3">Service Area</label>
                   <div className="grid grid-cols-2 gap-3">
-                    {industryOptions.map((opt, i) => {
+                    {serviceOptions.map((opt, i) => {
                       const OptIcon = opt.icon;
                       return (
                         <button
                           key={opt.key}
-                          onClick={() => handleIndustryChange(i)}
+                          onClick={() => handleServiceChange(i)}
                           className={`flex items-center gap-2 px-4 py-3 text-xs font-semibold tracking-wide uppercase transition-all duration-300 border ${
-                            industry === i
+                            service === i
                               ? "border-[#00d4ff] text-[#00d4ff] bg-[#00d4ff]/5"
                               : "border-white/10 text-[#a0aab5] hover:border-white/20 hover:text-white"
                           }`}
@@ -201,62 +201,62 @@ export default function Calculator() {
                       );
                     })}
                   </div>
-                  <p className="text-[#a0aab5]/50 text-xs mt-2 font-light">{ind.description}</p>
+                  <p className="text-[#a0aab5]/50 text-xs mt-2 font-light">{svc.description}</p>
                 </div>
 
-                {/* Locations */}
+                {/* Employees Affected */}
                 <div className="mb-8">
                   <label className="text-[#a0aab5] text-xs font-bold tracking-[0.15em] uppercase flex items-center gap-2 mb-3">
-                    <MapPin size={12} className="text-[#00d4ff]" />
-                    Number of Locations
+                    <Users size={12} className="text-[#00d4ff]" />
+                    Team Members Affected
                   </label>
                   <input
                     type="range"
                     min={1}
-                    max={10000}
-                    value={locations}
-                    onChange={(e) => setLocations(Number(e.target.value))}
+                    max={50}
+                    value={employees}
+                    onChange={(e) => setEmployees(Number(e.target.value))}
                     className="w-full accent-[#00d4ff] mb-2"
                   />
                   <div className="flex justify-between items-center">
                     <input
                       type="number"
                       min={1}
-                      max={10000}
-                      value={locations}
-                      onChange={(e) => setLocations(Math.max(1, Math.min(10000, Number(e.target.value))))}
+                      max={50}
+                      value={employees}
+                      onChange={(e) => setEmployees(Math.max(1, Math.min(50, Number(e.target.value))))}
                       className="w-20 bg-[#05070a] border border-white/10 text-white text-center py-2 font-mono text-lg focus:border-[#00d4ff] focus:outline-none transition-colors"
                     />
-                    <span className="text-[#a0aab5]/50 text-xs">location{locations > 1 ? "s" : ""}</span>
+                    <span className="text-[#a0aab5]/50 text-xs">team member{employees > 1 ? "s" : ""}</span>
                   </div>
                 </div>
 
-                {/* Daily Metric */}
+                {/* Hours Saved */}
                 <div className="mb-8">
                   <label className="text-[#a0aab5] text-xs font-bold tracking-[0.15em] uppercase flex items-center gap-2 mb-3">
-                    <BarChart3 size={12} className="text-[#00d4ff]" />
-                    {ind.dailyMetricLabel}
+                    <Clock size={12} className="text-[#00d4ff]" />
+                    {svc.hoursLabel}
                   </label>
                   <input
                     type="number"
                     min={1}
-                    value={dailyMetric}
-                    onChange={(e) => setDailyMetric(Math.max(1, Number(e.target.value)))}
+                    value={hoursSaved}
+                    onChange={(e) => setHoursSaved(Math.max(1, Number(e.target.value)))}
                     className="w-full bg-[#05070a] border border-white/10 text-white py-3 px-4 font-mono text-lg focus:border-[#00d4ff] focus:outline-none transition-colors"
                   />
                 </div>
 
-                {/* Avg Upsell */}
+                {/* Cost Per Hour */}
                 <div className="mb-4">
                   <label className="text-[#a0aab5] text-xs font-bold tracking-[0.15em] uppercase flex items-center gap-2 mb-3">
                     <DollarSign size={12} className="text-[#00d4ff]" />
-                    {ind.upsellLabel}
+                    Avg. Fully-Loaded Cost Per Hour ($)
                   </label>
                   <input
                     type="number"
                     min={1}
-                    value={avgUpsell}
-                    onChange={(e) => setAvgUpsell(Math.max(1, Number(e.target.value)))}
+                    value={costPerHour}
+                    onChange={(e) => setCostPerHour(Math.max(1, Number(e.target.value)))}
                     className="w-full bg-[#05070a] border border-white/10 text-white py-3 px-4 font-mono text-lg focus:border-[#00d4ff] focus:outline-none transition-colors"
                   />
                 </div>
@@ -272,71 +272,45 @@ export default function Calculator() {
               <div className="bg-[#0a0e1a] border border-[#00d4ff]/20 p-8 lg:p-10 sticky top-24">
                 <div className="flex items-center gap-2 mb-8">
                   <TrendingUp size={18} className="text-[#00d4ff]" />
-                  <h3 className="text-[#00d4ff] font-bold text-lg uppercase tracking-wide">Your Revenue Impact</h3>
+                  <h3 className="text-[#00d4ff] font-bold text-lg uppercase tracking-wide">Your Efficiency Gains</h3>
                 </div>
 
                 <div className="flex items-center gap-2 mb-6">
                   <Icon size={16} className="text-[#00d4ff]" />
-                  <span className="text-white text-sm font-semibold">{ind.label}</span>
-                  <span className="text-[#a0aab5]/50 text-xs ml-2">{locations} location{locations > 1 ? "s" : ""}</span>
+                  <span className="text-white text-sm font-semibold">{svc.label}</span>
+                  <span className="text-[#a0aab5]/50 text-xs ml-2">{employees} team member{employees > 1 ? "s" : ""}</span>
                 </div>
 
-                {/* Daily */}
+                {/* Hours Reclaimed */}
                 <div className="border-b border-white/5 pb-6 mb-6">
-                  <span className="text-[#a0aab5]/50 text-xs font-bold tracking-[0.2em] uppercase block mb-2">Daily Revenue Captured</span>
+                  <span className="text-[#a0aab5]/50 text-xs font-bold tracking-[0.2em] uppercase block mb-2">Hours Reclaimed Annually</span>
                   <span className="font-mono text-3xl lg:text-4xl font-black text-white tracking-tight">
-                    {formatCurrency(dailyCaptured)}
+                    {totalHoursAnnual.toLocaleString()} hrs
                   </span>
                 </div>
 
-                {/* Monthly */}
+                {/* Weekly Savings */}
                 <div className="border-b border-white/5 pb-6 mb-6">
-                  <span className="text-[#a0aab5]/50 text-xs font-bold tracking-[0.2em] uppercase block mb-2">Monthly Revenue Captured</span>
-                  <span className="font-mono text-4xl lg:text-5xl font-black text-[#00d4ff] tracking-tight">
-                    {formatCurrency(monthlyCaptured)}
+                  <span className="text-[#a0aab5]/50 text-xs font-bold tracking-[0.2em] uppercase block mb-2">Weekly Cost Savings</span>
+                  <span className="font-mono text-3xl lg:text-4xl font-black text-white tracking-tight">
+                    {formatCurrency(weeklySavings)}
                   </span>
                 </div>
 
-                {/* Annual */}
+                {/* Monthly Savings */}
                 <div className="border-b border-white/5 pb-6 mb-6">
-                  <span className="text-[#a0aab5]/50 text-xs font-bold tracking-[0.2em] uppercase block mb-2">Annual Revenue Captured</span>
+                  <span className="text-[#a0aab5]/50 text-xs font-bold tracking-[0.2em] uppercase block mb-2">Monthly Cost Savings</span>
                   <span className="font-mono text-4xl lg:text-5xl font-black text-[#00d4ff] tracking-tight">
-                    {formatCurrency(annualCaptured)}
+                    {formatCurrency(monthlySavings)}
                   </span>
                 </div>
 
-                {/* Agent Fee */}
-                {ind.agentFeeRate > 0 && (
-                  <div className="bg-[#05070a] border border-white/5 p-5 mb-6">
-                    <span className="text-[#a0aab5]/50 text-xs font-bold tracking-[0.2em] uppercase block mb-3">
-                      RRS Agent Fee ({(ind.agentFeeRate * 100).toFixed(1)}% on assisted checkouts)
-                    </span>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <span className="text-[#a0aab5]/40 text-xs block mb-1">Monthly</span>
-                        <span className="font-mono text-lg text-[#a0aab5] font-bold">{formatCurrency(agentFeeMonthly)}</span>
-                      </div>
-                      <div>
-                        <span className="text-[#a0aab5]/40 text-xs block mb-1">Annual</span>
-                        <span className="font-mono text-lg text-[#a0aab5] font-bold">{formatCurrency(agentFeeAnnual)}</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Net Impact */}
+                {/* Annual Savings */}
                 <div className="bg-[#00d4ff]/5 border border-[#00d4ff]/20 p-5 mb-8">
-                  <span className="text-[#00d4ff] text-xs font-bold tracking-[0.2em] uppercase block mb-3">Net Revenue Impact</span>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <span className="text-[#a0aab5]/40 text-xs block mb-1">Monthly</span>
-                      <span className="font-mono text-2xl text-white font-black">{formatCurrency(netMonthly)}</span>
-                    </div>
-                    <div>
-                      <span className="text-[#a0aab5]/40 text-xs block mb-1">Annual</span>
-                      <span className="font-mono text-2xl text-[#00d4ff] font-black">{formatCurrency(netAnnual)}</span>
-                    </div>
-                  </div>
+                  <span className="text-[#00d4ff] text-xs font-bold tracking-[0.2em] uppercase block mb-3">Annual Operational Savings</span>
+                  <span className="font-mono text-4xl lg:text-5xl font-black text-[#00d4ff] tracking-tight">
+                    {formatCurrency(annualSavings)}
+                  </span>
                 </div>
 
                 {/* CTA / Lead Form */}
@@ -348,12 +322,12 @@ export default function Calculator() {
                   >
                     <CheckCircle2 size={36} className="text-[#00d4ff] mx-auto mb-3" />
                     <h4 className="text-white font-bold text-lg mb-2">We'll Be in Touch!</h4>
-                    <p className="text-[#a0aab5] text-sm">Our team will reach out within 24 hours with a personalized revenue strategy for your business.</p>
+                    <p className="text-[#a0aab5] text-sm">Our team will reach out within 24 hours with a customized modernization plan for your business.</p>
                     <Link
                       href="/pricing"
                       className="w-full inline-flex items-center justify-center gap-2 px-8 py-3 mt-4 border border-white/10 text-[#a0aab5] font-bold text-xs tracking-wide uppercase hover:border-white/20 hover:text-white transition-all duration-300"
                     >
-                      View Pricing Plans <ArrowRight size={16} />
+                      View Service Plans <ArrowRight size={16} />
                     </Link>
                   </motion.div>
                 ) : !showForm ? (
@@ -368,7 +342,7 @@ export default function Calculator() {
                       href="/pricing"
                       className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 mt-3 border border-white/10 text-[#a0aab5] font-bold text-sm tracking-wide uppercase hover:border-white/20 hover:text-white transition-all duration-300"
                     >
-                      View Pricing Plans <ArrowRight size={18} />
+                      View Service Plans <ArrowRight size={18} />
                     </Link>
                   </>
                 ) : (
@@ -379,8 +353,8 @@ export default function Calculator() {
                     onSubmit={handleFormSubmit}
                     className="space-y-4"
                   >
-                    <p className="text-white font-bold text-sm uppercase tracking-wide mb-1">Get Your Personalized Report</p>
-                    <p className="text-[#a0aab5]/60 text-xs mb-4">We'll send a detailed breakdown tailored to your business.</p>
+                    <p className="text-white font-bold text-sm uppercase tracking-wide mb-1">Get Your Modernization Report</p>
+                    <p className="text-[#a0aab5]/60 text-xs mb-4">We'll send a detailed breakdown tailored to your business operations.</p>
 
                     <div className="relative">
                       <User size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#a0aab5]/40" />

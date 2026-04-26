@@ -3,50 +3,52 @@
  * Brand Bible: Deep Void Black (#05070a), Midnight Navy (#0a0e1a),
  * Electric Blue (#00d4ff), White (#ffffff), Steel Gray (#a0aab5)
  * Typography: Montserrat (300-900), JetBrains Mono for stats
+ *
+ * POSITIONING: Tech Development & Integrations for SMBs
+ * Services: Website Creation, Automation, Payments, CRM, Custom Workflows, Integrations
  */
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import {
-  MessageSquare,
-  PhoneMissed,
-  Database,
-  RefreshCw,
-  Target,
-  BarChart3,
+  Globe,
+  Zap,
+  CreditCard,
+  Users,
+  Workflow,
+  Puzzle,
   ArrowRight,
-  Phone,
-  Mail,
-  MessageCircle,
-  Calendar,
   CheckCircle2,
   ChevronDown,
   Menu,
   X,
-  ShoppingCart,
-  Building2,
-  Wrench,
-  Landmark,
+  Code2,
+  Layers,
+  Settings,
   TrendingUp,
-  AlertTriangle,
+  Clock,
+  DollarSign,
+  BarChart3,
+  Shield,
+  Rocket,
+  Building2,
+  Briefcase,
+  Wrench,
 } from "lucide-react";
 
 // CDN URLs
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/rrs_logo_cef58a2c.png";
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/hero_bg-CfpUPAcwvxhhV57hxf95nW.webp";
 const DASHBOARD_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/dashboard_mockup-L4YMtWk7ihCevE8W5xRSuG.webp";
-const MOBILE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/mobile_chat-924frS6Jh5zgkEafDqUweX.webp";
 
 // Team Headshots
 const CHUCK_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/chuck_headshot_cc9c5ae5.jpg";
 const DARIUS_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/darius_headshot_b8b97158.jpg";
-const LARRY_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/larry_drew_headshot_0722cdb2.png";
-const STEPHANIE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/stephanie_headshot_19786506.jpg";
 const TROY_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/troy_lemond_headshot_b1073e35.png";
 
 /* ─── Animated Counter ─── */
 function AnimatedCounter({ end, suffix = "", prefix = "", duration = 2000 }: { end: number; suffix?: string; prefix?: string; duration?: number }) {
-  const [count, setCount] = useState(end); // Start with real number as default
+  const [count, setCount] = useState(end);
   const [hasAnimated, setHasAnimated] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
 
@@ -54,9 +56,7 @@ function AnimatedCounter({ end, suffix = "", prefix = "", duration = 2000 }: { e
     const el = ref.current;
     if (!el || hasAnimated) return;
 
-    // Use native IntersectionObserver — works reliably on mobile Safari
     if (typeof IntersectionObserver === 'undefined') {
-      // No IO support — just show the number
       setCount(end);
       return;
     }
@@ -66,7 +66,6 @@ function AnimatedCounter({ end, suffix = "", prefix = "", duration = 2000 }: { e
         if (entries[0]?.isIntersecting && !hasAnimated) {
           setHasAnimated(true);
           observer.disconnect();
-          // Animate from 0 to end
           setCount(0);
           let start = 0;
           const increment = end / (duration / 16);
@@ -138,7 +137,7 @@ function Nav() {
   }, []);
 
   const links = [
-    { label: "Solution", href: "#solution" },
+    { label: "Solutions", href: "#solution" },
     { label: "Results", href: "#results" },
     { label: "Team", href: "#team" },
     { label: "Pricing", href: "/pricing" },
@@ -162,8 +161,8 @@ function Nav() {
               {l.label}
             </a>
           ))}
-          <a href="/calculator" className="ml-2 px-6 py-2.5 bg-[#00d4ff] text-[#05070a] text-sm font-bold tracking-wide uppercase hover:bg-[#00b8e0] transition-all duration-300">
-            Calculate ROI
+          <a href="#contact" className="ml-2 px-6 py-2.5 bg-[#00d4ff] text-[#05070a] text-sm font-bold tracking-wide uppercase hover:bg-[#00b8e0] transition-all duration-300">
+            Get Started
           </a>
         </div>
 
@@ -185,8 +184,8 @@ function Nav() {
               {l.label}
             </a>
           ))}
-          <a href="/calculator" onClick={() => setMobileOpen(false)} className="mt-3 block text-center px-6 py-2.5 bg-[#00d4ff] text-[#05070a] text-sm font-bold tracking-wide uppercase">
-            Calculate ROI
+          <a href="#contact" onClick={() => setMobileOpen(false)} className="mt-3 block text-center px-6 py-2.5 bg-[#00d4ff] text-[#05070a] text-sm font-bold tracking-wide uppercase">
+            Get Started
           </a>
         </motion.div>
       )}
@@ -212,22 +211,22 @@ function Hero() {
           className="max-w-4xl"
         >
           <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase mb-6">
-            Revenue Infrastructure
+            Technology Development & Integrations
           </p>
           <h1 className="text-5xl sm:text-6xl lg:text-[5.5rem] xl:text-[7rem] font-black text-white leading-[0.95] tracking-[-0.03em] mb-8">
-            Never Miss<br />
-            Another<br />
-            <span className="text-[#00d4ff]">Opportunity.</span>
+            We Build the<br />
+            Systems That<br />
+            <span className="text-[#00d4ff]">Scale You.</span>
           </h1>
           <p className="text-[#a0aab5] text-lg lg:text-xl font-light max-w-xl leading-relaxed mb-12">
-            AI-powered engagement that captures every lead, responds instantly, and converts interactions into revenue — 24/7.
+            Custom websites, automation, payments, CRM, and integrated workflows — built for businesses ready to modernize and grow.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <a href="#contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#00d4ff] text-[#05070a] font-bold text-sm tracking-wide uppercase hover:bg-[#00b8e0] transition-colors duration-300">
-              Start Capturing Revenue <ArrowRight size={18} />
+              Start Your Build <ArrowRight size={18} />
             </a>
             <a href="#solution" className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/20 text-white font-medium text-sm tracking-wide uppercase hover:border-white/40 transition-colors duration-300">
-              See How It Works <ChevronDown size={18} />
+              See What We Build <ChevronDown size={18} />
             </a>
           </div>
         </motion.div>
@@ -239,9 +238,9 @@ function Hero() {
 /* ─── Problem Section ─── */
 function Problem() {
   const stats = [
-    { number: 28, suffix: "%", label: "of business calls go unanswered every day" },
-    { prefix: "$", number: 126, suffix: "K+", label: "lost per year from missed calls alone" },
-    { number: 80, suffix: "%", label: "conversion drop when response exceeds 5 minutes" },
+    { number: 73, suffix: "%", label: "of SMBs run on disconnected, manual systems" },
+    { prefix: "$", number: 150, suffix: "K+", label: "lost annually to operational inefficiency" },
+    { number: 60, suffix: "%", label: "of businesses lack a modern digital infrastructure" },
   ];
 
   return (
@@ -252,10 +251,10 @@ function Problem() {
           <div>
             <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase mb-4">The Problem</p>
             <h2 className="text-4xl lg:text-[3.5rem] font-black text-white leading-[1.05] tracking-[-0.02em] mb-6">
-              Your Business Is Losing Money Right Now.
+              Your Operations Are Holding You Back.
             </h2>
             <p className="text-[#a0aab5] text-lg font-light leading-relaxed">
-              Every missed call, slow follow-up, and disconnected tool is a customer walking away. The revenue is there — you're just not capturing it.
+              Manual processes, disconnected tools, outdated websites, and patchwork systems are costing you time, money, and growth. Most businesses know they need to modernize — they just don't know where to start.
             </p>
           </div>
 
@@ -292,26 +291,26 @@ function Solution() {
           >
             <img
               src={DASHBOARD_IMG}
-              alt="RRS Dashboard"
+              alt="RRS Platform"
               className="w-full max-w-lg mx-auto lg:mx-0 opacity-90"
             />
           </motion.div>
 
           {/* Right: Text */}
           <div className="order-1 lg:order-2">
-            <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase mb-4">The Solution</p>
+            <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase mb-4">What We Build</p>
             <h2 className="text-4xl lg:text-[3.5rem] font-black text-white leading-[1.05] tracking-[-0.02em] mb-6">
-              One System.<br />Every Channel.<br />Every Opportunity.
+              Custom Tech.<br />Seamless<br />Integrations.
             </h2>
             <p className="text-[#a0aab5] text-lg font-light leading-relaxed mb-8">
-              Revenue Relay Systems captures every inbound lead across calls, texts, chat, email, and web — then responds instantly, follows up automatically, and converts it into revenue.
+              We design and develop the digital infrastructure your business needs — from websites and payment systems to CRM platforms and automated workflows. Everything built to work together.
             </p>
             <div className="grid grid-cols-2 gap-4">
               {[
-                { icon: Phone, text: "Calls" },
-                { icon: MessageSquare, text: "SMS & Chat" },
-                { icon: Mail, text: "Email" },
-                { icon: Calendar, text: "Scheduling" },
+                { icon: Globe, text: "Websites" },
+                { icon: Zap, text: "Automation" },
+                { icon: CreditCard, text: "Payments" },
+                { icon: Puzzle, text: "Integrations" },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-3 text-white/80">
                   <item.icon size={18} className="text-[#00d4ff]" />
@@ -329,20 +328,20 @@ function Solution() {
 /* ─── How It Works Section ─── */
 function HowItWorks() {
   const steps = [
-    { num: "01", title: "Lead Comes In", desc: "Call, text, chat, web form, or ad click" },
-    { num: "02", title: "AI Responds", desc: "Personalized conversation in seconds" },
-    { num: "03", title: "CRM Captures", desc: "Every detail logged automatically" },
-    { num: "04", title: "Follow-Up Fires", desc: "Automated sequences keep it going" },
-    { num: "05", title: "Conversion", desc: "Appointments booked, deals closed" },
-    { num: "06", title: "Retargeting", desc: "Re-engage to maximize lifetime value" },
+    { num: "01", title: "Discovery", desc: "We learn your business, workflows, and goals" },
+    { num: "02", title: "Architecture", desc: "We design the systems and integrations you need" },
+    { num: "03", title: "Build", desc: "Custom development — websites, automation, payments, CRM" },
+    { num: "04", title: "Integrate", desc: "Connect everything into one seamless ecosystem" },
+    { num: "05", title: "Deploy", desc: "Launch with testing, training, and full support" },
+    { num: "06", title: "Optimize", desc: "Ongoing improvements to maximize performance" },
   ];
 
   return (
     <Section id="how" className="py-28 lg:py-40 bg-[#0a0e1a]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase mb-4">How It Works</p>
+        <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase mb-4">How We Work</p>
         <h2 className="text-4xl lg:text-[3.5rem] font-black text-white leading-[1.05] tracking-[-0.02em] mb-16">
-          From Lead to Revenue<br />in Six Steps.
+          From Vision to<br />Live Systems.
         </h2>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-14">
@@ -365,15 +364,15 @@ function HowItWorks() {
   );
 }
 
-/* ─── Features Section ─── */
+/* ─── Core Capabilities Section ─── */
 function Features() {
   const features = [
-    { icon: MessageSquare, title: "AI Chat + SMS", desc: "Engage customers instantly in 20+ languages on their preferred channel." },
-    { icon: PhoneMissed, title: "Missed Call Recovery", desc: "Never lose a lead to a missed call again." },
-    { icon: Database, title: "CRM Auto-Logging", desc: "Every interaction captured without lifting a finger." },
-    { icon: RefreshCw, title: "Automated Follow-Ups", desc: "Persistent, personalized outreach on autopilot." },
-    { icon: Target, title: "Smart Retargeting", desc: "Bring back leads who didn't convert the first time." },
-    { icon: BarChart3, title: "Performance Analytics", desc: "See exactly what's working and what's not." },
+    { icon: Globe, title: "Website Development", desc: "Custom-built, conversion-optimized websites that establish credibility and drive business." },
+    { icon: Zap, title: "Automation", desc: "Eliminate manual tasks with intelligent workflows that run your operations on autopilot." },
+    { icon: CreditCard, title: "Payment Systems", desc: "Stripe and payment integrations that accelerate cash flow and simplify transactions." },
+    { icon: Users, title: "CRM Platforms", desc: "Centralized client management — track every relationship, automate every follow-up." },
+    { icon: Workflow, title: "Custom Workflows", desc: "Tailored business processes built around how you actually operate — not generic templates." },
+    { icon: Puzzle, title: "Integrations", desc: "Connect your tools, platforms, and data into one unified system that works together." },
   ];
 
   return (
@@ -382,7 +381,7 @@ function Features() {
         <div className="max-w-2xl mb-16">
           <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase mb-4">Core Capabilities</p>
           <h2 className="text-4xl lg:text-[3.5rem] font-black text-white leading-[1.05] tracking-[-0.02em]">
-            Everything You Need.<br />Nothing You Don't.
+            Everything You Need<br />to Modernize.
           </h2>
         </div>
 
@@ -409,24 +408,25 @@ function Features() {
   );
 }
 
-/* ─── AI Layer Section ─── */
-function AILayer() {
+/* ─── Technology Layer Section ─── */
+function TechLayer() {
   return (
     <Section className="py-28 lg:py-40 bg-[#0a0e1a] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           <div>
-            <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase mb-4">The AI Layer</p>
+            <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase mb-4">The Technology Layer</p>
             <h2 className="text-4xl lg:text-[3.5rem] font-black text-white leading-[1.05] tracking-[-0.02em] mb-6">
-              Your Best Employee That Never Sleeps.
+              Built to Run.<br />Built to Scale.
             </h2>
             <div className="space-y-5 mt-8">
               {[
-                "Natural, human-like conversations — not robotic scripts",
-                "Communicates in 20+ languages — reach every customer",
-                "Personalized responses based on customer context",
-                "Available 24/7 — nights, weekends, holidays",
-                "Learns and improves with every interaction",
+                "Enterprise-grade architecture — not off-the-shelf templates",
+                "Stripe, Square, and custom payment gateway integrations",
+                "CRM systems that centralize every client touchpoint",
+                "Automated workflows that eliminate manual bottlenecks",
+                "Client portals and dashboards for self-service access",
+                "Scalable infrastructure that grows with your business",
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-3">
                   <CheckCircle2 size={18} className="text-[#00d4ff] mt-0.5 shrink-0" />
@@ -436,86 +436,98 @@ function AILayer() {
             </div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="flex justify-center"
-          >
-            <img
-              src={MOBILE_IMG}
-              alt="AI Chat Interface"
-              className="w-64 lg:w-72 opacity-90"
-            />
-          </motion.div>
+          <div className="space-y-6">
+            {[
+              { icon: Code2, label: "Custom Development", desc: "Purpose-built solutions tailored to your exact business requirements." },
+              { icon: Layers, label: "System Integration", desc: "Connect disparate tools into one cohesive, automated ecosystem." },
+              { icon: Settings, label: "Ongoing Optimization", desc: "Continuous improvements to keep your systems performing at peak." },
+              { icon: Shield, label: "Reliable Infrastructure", desc: "Secure, stable, and built for uptime — your business depends on it." },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="flex items-start gap-5 p-5 border border-white/5 bg-[#05070a]/50"
+              >
+                <div className="w-10 h-10 flex items-center justify-center border border-[#00d4ff]/20 shrink-0">
+                  <item.icon size={20} className="text-[#00d4ff]" />
+                </div>
+                <div>
+                  <h4 className="text-white font-bold text-sm mb-1">{item.label}</h4>
+                  <p className="text-[#a0aab5] text-sm font-light leading-relaxed">{item.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </Section>
   );
 }
 
-/* ─── Revenue Impact Calculator Section ─── */
+/* ─── Results / Impact Section ─── */
 const industries = [
   {
-    icon: ShoppingCart,
-    label: "Retail / Grocery",
+    icon: Briefcase,
+    label: "Legal Publishing",
     color: "#00d4ff",
-    lostLabel: "LOST DAILY",
-    lostAmount: "$10,000",
-    lostDetail: "500 customers × $20 missed upsell per cart",
-    capturedLabel: "CAPTURED DAILY",
-    capturedAmount: "$10,000",
-    capturedDetail: "AI-assisted carts: $65–$80 vs $45 avg",
-    monthly: "$300,000+",
-    annual: "$3.6M+",
-    quote: "By guiding customers from intent to full carts, RRS increases basket size automatically.",
+    beforeLabel: "BEFORE",
+    beforeItems: ["Paper forms & phone intake", "Manual invoicing — 30-60 day cycles", "No client portal or self-service"],
+    afterLabel: "AFTER",
+    afterItems: ["Digital submission workflow", "Stripe instant payments", "Full client portal with tracking"],
+    savings: "$150K+",
+    savingsLabel: "annual operational savings",
+    efficiency: "90%",
+    efficiencyLabel: "reduction in admin hours",
+    quote: "From paper-heavy legacy operations to a scalable digital infrastructure platform.",
   },
   {
     icon: Building2,
     label: "Hospitality",
     color: "#a855f7",
-    lostLabel: "MISSED DAILY",
-    lostAmount: "$15,000",
-    lostDetail: "100 rooms × $150 in missed upsells per guest",
-    capturedLabel: "CAPTURED DAILY",
-    capturedAmount: "$15,000",
-    capturedDetail: "AI concierge: $150–$400 extras per guest",
-    monthly: "$450,000+",
-    annual: "$5M+",
-    quote: "Every guest interaction becomes a revenue opportunity.",
+    beforeLabel: "BEFORE",
+    beforeItems: ["Disconnected booking systems", "Manual guest communication", "No upsell automation"],
+    afterLabel: "AFTER",
+    afterItems: ["Unified reservation platform", "Automated guest engagement", "Integrated upsell workflows"],
+    savings: "$200K+",
+    savingsLabel: "in new revenue captured",
+    efficiency: "75%",
+    efficiencyLabel: "faster guest onboarding",
+    quote: "Connected systems turn every guest interaction into a revenue opportunity.",
   },
   {
     icon: Wrench,
-    label: "HVAC / Plumbing",
+    label: "Home Services",
     color: "#f59e0b",
-    lostLabel: "LOST DAILY",
-    lostAmount: "$4,000",
-    lostDetail: "10 missed calls × $400 avg job value",
-    capturedLabel: "RECOVERED DAILY",
-    capturedAmount: "$3,200",
-    capturedDetail: "80% of missed leads captured by RRS",
-    monthly: "$96,000+",
-    annual: "$1.1M+",
-    quote: "Every missed call is revenue. RRS makes sure none slip through.",
+    beforeLabel: "BEFORE",
+    beforeItems: ["Missed calls go unanswered", "Manual scheduling & dispatch", "Paper invoices and delayed payments"],
+    afterLabel: "AFTER",
+    afterItems: ["Automated call capture & routing", "Digital scheduling + CRM", "Instant mobile payments"],
+    savings: "$120K+",
+    savingsLabel: "recovered from missed opportunities",
+    efficiency: "80%",
+    efficiencyLabel: "reduction in scheduling time",
+    quote: "Every call answered, every job tracked, every payment collected — automatically.",
   },
   {
-    icon: Landmark,
-    label: "Municipalities",
+    icon: BarChart3,
+    label: "Professional Services",
     color: "#10b981",
-    lostLabel: "WASTED DAILY",
-    lostAmount: "$10,000",
-    lostDetail: "1,000 requests × $5–$12 per call center request",
-    capturedLabel: "SAVED DAILY",
-    capturedAmount: "$9,000",
-    capturedDetail: "AI-handled requests: <$1 each",
-    monthly: "$120,000+",
-    annual: "$1.4M+",
-    quote: "Reduce costs while improving citizen satisfaction.",
+    beforeLabel: "BEFORE",
+    beforeItems: ["Spreadsheet-based client tracking", "Manual billing and proposals", "No centralized workflow"],
+    afterLabel: "AFTER",
+    afterItems: ["CRM with automated pipelines", "Integrated invoicing & payments", "Custom workflow automation"],
+    savings: "$100K+",
+    savingsLabel: "in operational efficiency gains",
+    efficiency: "65%",
+    efficiencyLabel: "less time on admin tasks",
+    quote: "Spend less time managing operations and more time growing your business.",
   },
 ];
 
-function RevenueImpact() {
+function Results() {
   const [active, setActive] = useState(0);
   const ind = industries[active];
   const Icon = ind.icon;
@@ -526,9 +538,9 @@ function RevenueImpact() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <div className="max-w-3xl mb-12">
-          <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase mb-4">What This Means in Dollars</p>
+          <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase mb-4">Real Impact</p>
           <h2 className="text-4xl lg:text-[3.5rem] font-black text-white leading-[1.05] tracking-[-0.02em]">
-            Missed Revenue →<br /><span className="text-[#00d4ff]">Captured Revenue.</span>
+            Manual Operations →<br /><span className="text-[#00d4ff]">Modern Systems.</span>
           </h2>
         </div>
 
@@ -554,25 +566,26 @@ function RevenueImpact() {
           })}
         </div>
 
-        {/* Calculator Card */}
+        {/* Before / After Card */}
         <motion.div
           key={active}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          {/* Main Calculator Grid */}
+          {/* Main Grid */}
           <div className="grid lg:grid-cols-3 gap-0">
-            {/* LOST */}
+            {/* BEFORE */}
             <div className="bg-[#05070a] border border-white/5 p-8 lg:p-10 flex flex-col justify-center">
-              <div className="flex items-center gap-2 mb-4">
-                <AlertTriangle size={14} className="text-red-500/70" />
-                <span className="text-red-500/70 text-xs font-bold tracking-[0.2em] uppercase">{ind.lostLabel}</span>
+              <span className="text-red-500/70 text-xs font-bold tracking-[0.2em] uppercase mb-6">{ind.beforeLabel}</span>
+              <div className="space-y-4">
+                {ind.beforeItems.map((item, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <X size={16} className="text-red-500/50 shrink-0" />
+                    <span className="text-[#a0aab5]/70 text-sm">{item}</span>
+                  </div>
+                ))}
               </div>
-              <div className="font-mono text-4xl lg:text-5xl font-black text-red-400/80 mb-3 tracking-tight">
-                {ind.lostAmount}
-              </div>
-              <p className="text-[#a0aab5]/60 text-sm font-light">{ind.lostDetail}</p>
             </div>
 
             {/* ARROW / TRANSITION */}
@@ -588,16 +601,17 @@ function RevenueImpact() {
               </div>
             </div>
 
-            {/* CAPTURED */}
+            {/* AFTER */}
             <div className="bg-[#05070a] border border-white/5 p-8 lg:p-10 flex flex-col justify-center" style={{ borderColor: `${c}33` }}>
-              <div className="flex items-center gap-2 mb-4">
-                <TrendingUp size={14} style={{ color: c }} />
-                <span style={{ color: c }} className="text-xs font-bold tracking-[0.2em] uppercase">{ind.capturedLabel}</span>
+              <span style={{ color: c }} className="text-xs font-bold tracking-[0.2em] uppercase mb-6">{ind.afterLabel}</span>
+              <div className="space-y-4">
+                {ind.afterItems.map((item, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <CheckCircle2 size={16} style={{ color: c }} className="shrink-0" />
+                    <span className="text-white text-sm font-medium">{item}</span>
+                  </div>
+                ))}
               </div>
-              <div className="font-mono text-4xl lg:text-5xl font-black mb-3 tracking-tight" style={{ color: c }}>
-                {ind.capturedAmount}
-              </div>
-              <p className="text-[#a0aab5]/60 text-sm font-light">{ind.capturedDetail}</p>
             </div>
           </div>
 
@@ -605,12 +619,14 @@ function RevenueImpact() {
           <div className="bg-[#05070a] border border-t-0 border-white/5 p-8 lg:p-10">
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 items-center">
               <div>
-                <span className="text-[#a0aab5]/50 text-xs font-bold tracking-[0.2em] uppercase block mb-2">Monthly Impact</span>
-                <span className="font-mono text-3xl lg:text-4xl font-black text-white tracking-tight">{ind.monthly}</span>
+                <span className="text-[#a0aab5]/50 text-xs font-bold tracking-[0.2em] uppercase block mb-2">Cost Impact</span>
+                <span className="font-mono text-3xl lg:text-4xl font-black tracking-tight" style={{ color: c }}>{ind.savings}</span>
+                <span className="text-[#a0aab5]/50 text-xs block mt-1">{ind.savingsLabel}</span>
               </div>
               <div>
-                <span className="text-[#a0aab5]/50 text-xs font-bold tracking-[0.2em] uppercase block mb-2">Annual Impact</span>
-                <span className="font-mono text-3xl lg:text-4xl font-black tracking-tight" style={{ color: c }}>{ind.annual}</span>
+                <span className="text-[#a0aab5]/50 text-xs font-bold tracking-[0.2em] uppercase block mb-2">Efficiency Gain</span>
+                <span className="font-mono text-3xl lg:text-4xl font-black text-white tracking-tight">{ind.efficiency}</span>
+                <span className="text-[#a0aab5]/50 text-xs block mt-1">{ind.efficiencyLabel}</span>
               </div>
               <div className="sm:col-span-2">
                 <p className="text-[#a0aab5] text-base font-light italic leading-relaxed">
@@ -627,7 +643,7 @@ function RevenueImpact() {
               className="inline-flex items-center justify-center gap-2 px-10 py-4 text-[#05070a] font-bold text-sm tracking-wide uppercase transition-colors duration-300"
               style={{ backgroundColor: c }}
             >
-              Calculate Your Revenue Impact <ArrowRight size={18} />
+              Start Your Build <ArrowRight size={18} />
             </a>
           </div>
         </motion.div>
@@ -636,17 +652,15 @@ function RevenueImpact() {
   );
 }
 
-/* UseCases removed — replaced by RevenueImpact calculator above */
-
 /* ─── Why RRS Section ─── */
 function WhyRRS() {
   return (
     <Section className="py-28 lg:py-40">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="max-w-2xl mb-16">
-          <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase mb-4">Why RRS Wins</p>
+          <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase mb-4">Why RRS</p>
           <h2 className="text-4xl lg:text-[3.5rem] font-black text-white leading-[1.05] tracking-[-0.02em]">
-            One System Beats<br />a Dozen Tools.
+            One Partner Beats<br />a Dozen Vendors.
           </h2>
         </div>
 
@@ -656,11 +670,11 @@ function WhyRRS() {
             <h3 className="text-[#a0aab5] text-lg font-bold mb-6 uppercase tracking-wide">Without RRS</h3>
             <div className="space-y-4">
               {[
-                "5-10 disconnected tools",
-                "Leads slip through the cracks",
-                "Slow, manual follow-ups",
-                "No visibility into what's working",
-                "Revenue left on the table",
+                "5-10 disconnected tools and vendors",
+                "Manual processes eating up staff time",
+                "No unified system or data visibility",
+                "Outdated website that doesn't convert",
+                "Growth capped by operational bottlenecks",
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-3">
                   <X size={16} className="text-red-500/70 shrink-0" />
@@ -675,11 +689,11 @@ function WhyRRS() {
             <h3 className="text-[#00d4ff] text-lg font-bold mb-6 uppercase tracking-wide">With RRS</h3>
             <div className="space-y-4">
               {[
-                "One unified platform",
-                "Every lead captured and followed up",
-                "Instant, automated engagement",
-                "Real-time performance dashboard",
-                "Every opportunity converted",
+                "One integrated technology partner",
+                "Automated workflows that run 24/7",
+                "Unified platform with real-time dashboards",
+                "Modern website built for your business",
+                "Scalable systems that grow with you",
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-3">
                   <CheckCircle2 size={16} className="text-[#00d4ff] shrink-0" />
@@ -700,7 +714,7 @@ function Team() {
     {
       name: "Chuck Bryant Jr.",
       title: "Founder & Principal",
-      bio: "20+ years in technology, private equity, and business operations. Visionary leader driving RRS from concept to market.",
+      bio: "Technology and business operations leader driving RRS from concept to market. Visionary behind the company's approach to digital modernization for growing businesses.",
       img: CHUCK_IMG,
       linkedin: "https://www.linkedin.com/in/chuck-bryant-jr-86539564/",
     },
@@ -709,18 +723,6 @@ function Team() {
       title: "Principal, Strategic Partnerships",
       bio: "Former professional athlete turned entrepreneur and investor. Brings elite-level discipline and a winning mindset to every venture.",
       img: DARIUS_IMG,
-    },
-    {
-      name: "Larry Drew II",
-      title: "Principal, Business Development",
-      bio: "Accomplished athlete and business strategist with deep expertise in brand building, partnerships, and high-performance team culture.",
-      img: LARRY_IMG,
-    },
-    {
-      name: "Stephanie Arakel",
-      title: "Principal, Brand & Growth",
-      bio: "Award-winning marketing executive specializing in brand strategy, customer acquisition, and high-impact digital campaigns.",
-      img: STEPHANIE_IMG,
     },
     {
       name: "Troy Lemond",
@@ -736,11 +738,11 @@ function Team() {
         <div className="mb-16 lg:mb-20">
           <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase mb-4">Leadership</p>
           <h2 className="text-4xl lg:text-[3.5rem] font-black text-white leading-[1.05] tracking-[-0.02em]">
-            The Team Behind<br />the Engine.
+            The Team Behind<br />the Build.
           </h2>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-10">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
           {team.map((member, i) => (
             <motion.div
               key={member.name}
@@ -794,10 +796,10 @@ function CTA() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
         <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase mb-6">Get Started</p>
         <h2 className="text-4xl lg:text-[4rem] font-black text-white leading-[1.05] tracking-[-0.02em] mb-6 max-w-3xl mx-auto">
-          Capture Every Opportunity. Convert Every Interaction.
+          Ready to Modernize Your Business?
         </h2>
         <p className="text-[#a0aab5] text-lg font-light max-w-xl mx-auto mb-12">
-          Let's build your revenue engine.
+          Let's build the systems that scale your operations, streamline your workflows, and grow your revenue.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
           <a href="mailto:hello@revenuerelaysystems.com" className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-[#00d4ff] text-[#05070a] font-bold text-sm tracking-wide uppercase hover:bg-[#00b8e0] transition-colors duration-300">
@@ -846,9 +848,9 @@ export default function Home() {
       <RelayLine />
       <Features />
       <RelayLine />
-      <AILayer />
+      <TechLayer />
       <RelayLine />
-      <RevenueImpact />
+      <Results />
       <RelayLine />
       <WhyRRS />
       <RelayLine />
