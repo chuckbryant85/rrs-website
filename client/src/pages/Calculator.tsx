@@ -134,9 +134,6 @@ export default function Calculator() {
             </div>
           </Link>
           <div className="flex items-center gap-4">
-            <Link href="/pricing" className="text-[#a0aab5] hover:text-white text-sm font-medium tracking-wide uppercase transition-colors">
-              Pricing
-            </Link>
             <Link href="/" className="text-[#a0aab5] hover:text-white text-sm font-medium tracking-wide uppercase transition-colors">
               Home
             </Link>
@@ -324,10 +321,10 @@ export default function Calculator() {
                     <h4 className="text-white font-bold text-lg mb-2">We'll Be in Touch!</h4>
                     <p className="text-[#a0aab5] text-sm">Our team will reach out within 24 hours with a customized modernization plan for your business.</p>
                     <Link
-                      href="/pricing"
+                      href="/"
                       className="w-full inline-flex items-center justify-center gap-2 px-8 py-3 mt-4 border border-white/10 text-[#a0aab5] font-bold text-xs tracking-wide uppercase hover:border-white/20 hover:text-white transition-all duration-300"
                     >
-                      View Service Plans <ArrowRight size={16} />
+                      Back to Home <ArrowRight size={16} />
                     </Link>
                   </motion.div>
                 ) : !showForm ? (
@@ -339,10 +336,10 @@ export default function Calculator() {
                       Get Your Custom Report <Send size={18} />
                     </button>
                     <Link
-                      href="/pricing"
+                      href="/"
                       className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 mt-3 border border-white/10 text-[#a0aab5] font-bold text-sm tracking-wide uppercase hover:border-white/20 hover:text-white transition-all duration-300"
                     >
-                      View Service Plans <ArrowRight size={18} />
+                      Back to Home <ArrowRight size={18} />
                     </Link>
                   </>
                 ) : (

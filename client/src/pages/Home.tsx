@@ -140,7 +140,6 @@ function Nav() {
     { label: "Solutions", href: "#solution" },
     { label: "Results", href: "#results" },
     { label: "Team", href: "#team" },
-    { label: "Pricing", href: "/pricing" },
   ];
 
   return (
