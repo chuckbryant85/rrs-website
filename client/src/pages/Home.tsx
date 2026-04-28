@@ -814,6 +814,7 @@ function CTA() {
           <span className="hidden sm:inline text-white/10">|</span>
           <a href="mailto:hello@revenuerelaysystems.com" className="hover:text-[#00d4ff] transition-colors">hello@revenuerelaysystems.com</a>
         </div>
+        <p className="text-[#a0aab5]/60 text-sm mt-6">3064 Wake Forest Road, Raleigh, NC 27609</p>
       </div>
     </Section>
   );
@@ -828,6 +829,9 @@ function Footer() {
           <img src={LOGO_URL} alt="RRS" className="h-8 w-auto opacity-60" />
           <span className="text-[#a0aab5]/50 text-sm font-semibold tracking-wide">Revenue Relay Systems</span>
         </div>
+        <p className="text-[#a0aab5]/50 text-xs tracking-wide">
+          3064 Wake Forest Road, Raleigh, NC 27609
+        </p>
         <p className="text-[#a0aab5]/50 text-xs tracking-wide">
           &copy; {new Date().getFullYear()} Revenue Relay Systems. All rights reserved.
         </p>
