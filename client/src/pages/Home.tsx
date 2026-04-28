@@ -467,20 +467,6 @@ function TechLayer() {
 /* ─── Results / Impact Section ─── */
 const industries = [
   {
-    icon: Briefcase,
-    label: "Legal Publishing",
-    color: "#00d4ff",
-    beforeLabel: "BEFORE",
-    beforeItems: ["Paper forms & phone intake", "Manual invoicing — 30-60 day cycles", "No client portal or self-service"],
-    afterLabel: "AFTER",
-    afterItems: ["Digital submission workflow", "Stripe instant payments", "Full client portal with tracking"],
-    savings: "$150K+",
-    savingsLabel: "annual operational savings",
-    efficiency: "90%",
-    efficiencyLabel: "reduction in admin hours",
-    quote: "From paper-heavy legacy operations to a scalable digital infrastructure platform.",
-  },
-  {
     icon: Building2,
     label: "Hospitality",
     color: "#a855f7",
@@ -493,6 +479,20 @@ const industries = [
     efficiency: "75%",
     efficiencyLabel: "faster guest onboarding",
     quote: "Connected systems turn every guest interaction into a revenue opportunity.",
+  },
+  {
+    icon: Briefcase,
+    label: "Legal Publishing",
+    color: "#00d4ff",
+    beforeLabel: "BEFORE",
+    beforeItems: ["Paper forms & phone intake", "Manual invoicing — 30-60 day cycles", "No client portal or self-service"],
+    afterLabel: "AFTER",
+    afterItems: ["Digital submission workflow", "Stripe instant payments", "Full client portal with tracking"],
+    savings: "$150K+",
+    savingsLabel: "annual operational savings",
+    efficiency: "90%",
+    efficiencyLabel: "reduction in admin hours",
+    quote: "From paper-heavy legacy operations to a scalable digital infrastructure platform.",
   },
   {
     icon: Wrench,
