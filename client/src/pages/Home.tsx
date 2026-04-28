@@ -41,10 +41,8 @@ const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxY
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/hero_bg-CfpUPAcwvxhhV57hxf95nW.webp";
 const DASHBOARD_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/dashboard_mockup-L4YMtWk7ihCevE8W5xRSuG.webp";
 
-// Team Headshots
+// Founder Headshot
 const CHUCK_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/chuck_headshot_cc9c5ae5.jpg";
-const DARIUS_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/darius_headshot_b8b97158.jpg";
-const TROY_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/troy_lemond_headshot_b1073e35.png";
 
 /* ─── Animated Counter ─── */
 function AnimatedCounter({ end, suffix = "", prefix = "", duration = 2000 }: { end: number; suffix?: string; prefix?: string; duration?: number }) {
@@ -709,79 +707,85 @@ function WhyRRS() {
 
 /* ─── Team Section ─── */
 function Team() {
-  const team = [
-    {
-      name: "Chuck Bryant Jr.",
-      title: "Founder & Principal",
-      bio: "Technology and business operations leader driving RRS from concept to market. Visionary behind the company's approach to digital modernization for growing businesses.",
-      img: CHUCK_IMG,
-      linkedin: "https://www.linkedin.com/in/chuck-bryant-jr-86539564/",
-    },
-    {
-      name: "Darius Miller",
-      title: "Principal, Strategic Partnerships",
-      bio: "Former professional athlete turned entrepreneur and investor. Brings elite-level discipline and a winning mindset to every venture.",
-      img: DARIUS_IMG,
-    },
-    {
-      name: "Troy Lemond",
-      title: "Principal, Strategic Alliances",
-      bio: "Legendary network builder and relationship strategist. Architects the key alliances that power RRS's product ecosystem and market reach.",
-      img: TROY_IMG,
-    },
-  ];
-
   return (
     <Section id="team" className="py-28 lg:py-40">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="mb-16 lg:mb-20">
-          <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase mb-4">Leadership</p>
-          <h2 className="text-4xl lg:text-[3.5rem] font-black text-white leading-[1.05] tracking-[-0.02em]">
-            The Team Behind<br />the Build.
-          </h2>
-        </div>
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          {/* Left — Photo */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="relative group"
+          >
+            <div className="relative overflow-hidden">
+              <img
+                src={CHUCK_IMG}
+                alt="Chuck Bryant Jr."
+                className="w-full aspect-[4/5] object-cover"
+              />
+              {/* Gradient overlay at bottom */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#05070a] via-transparent to-transparent opacity-60" />
+              {/* Blue accent line */}
+              <div className="absolute bottom-0 left-0 w-full h-[3px] bg-[#00d4ff]" />
+            </div>
+            {/* Decorative frame element */}
+            <div className="absolute -top-4 -right-4 w-32 h-32 border border-[#00d4ff]/20" />
+            <div className="absolute -bottom-4 -left-4 w-24 h-24 border border-[#00d4ff]/10" />
+          </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-          {team.map((member, i) => (
-            <motion.div
-              key={member.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group"
-            >
-              {/* Headshot */}
-              <div className="relative mb-6 overflow-hidden">
-                <div className="aspect-square overflow-hidden">
-                  <img
-                    src={member.img}
-                    alt={member.name}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                  />
-                </div>
-                {/* Blue accent bar at bottom of image */}
-                <div className="absolute bottom-0 left-0 w-full h-[3px] bg-[#00d4ff] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+          {/* Right — Bio */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+          >
+            <p className="text-[#00d4ff] text-sm font-semibold tracking-[0.2em] uppercase mb-4">Founder</p>
+            <h2 className="text-4xl lg:text-[3.5rem] font-black text-white leading-[1.05] tracking-[-0.02em] mb-2">
+              Chuck Bryant Jr.
+            </h2>
+            <p className="text-[#00d4ff] text-sm font-bold tracking-[0.15em] uppercase mb-8">
+              Founder & Principal
+            </p>
+
+            <div className="space-y-5 mb-10">
+              <p className="text-[#a0aab5] text-base font-light leading-relaxed">
+                Technology and business operations leader who built Revenue Relay Systems to solve a problem he saw firsthand — small and mid-size companies stuck running on outdated processes, disconnected tools, and manual workflows that cost them time and money every day.
+              </p>
+              <p className="text-[#a0aab5] text-base font-light leading-relaxed">
+                RRS exists to give growing businesses the same caliber of custom-built technology that large enterprises take for granted — websites, automation, payments, CRM, and integrated workflows — without the enterprise price tag or the six-month timeline.
+              </p>
+            </div>
+
+            {/* Stats row */}
+            <div className="grid grid-cols-3 gap-6 mb-10 border-t border-white/5 pt-8">
+              <div>
+                <span className="font-mono text-2xl lg:text-3xl font-black text-white block">100%</span>
+                <span className="text-[#a0aab5]/50 text-xs font-bold tracking-[0.15em] uppercase">Custom Built</span>
               </div>
+              <div>
+                <span className="font-mono text-2xl lg:text-3xl font-black text-white block">SMB</span>
+                <span className="text-[#a0aab5]/50 text-xs font-bold tracking-[0.15em] uppercase">Focused</span>
+              </div>
+              <div>
+                <span className="font-mono text-2xl lg:text-3xl font-black text-white block">Full</span>
+                <span className="text-[#a0aab5]/50 text-xs font-bold tracking-[0.15em] uppercase">Stack</span>
+              </div>
+            </div>
 
-              {/* Info */}
-              <h3 className="text-white font-bold text-lg mb-1">{member.name}</h3>
-              <p className="text-[#00d4ff] text-sm font-semibold tracking-wide uppercase mb-3">{member.title}</p>
-              <p className="text-[#a0aab5] text-sm font-light leading-relaxed mb-4">{member.bio}</p>
-
-              {member.linkedin && (
-                <a
-                  href={member.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-[#a0aab5] hover:text-[#00d4ff] text-xs font-medium tracking-wide uppercase transition-colors duration-200"
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                  LinkedIn
-                </a>
-              )}
-            </motion.div>
-          ))}
+            {/* LinkedIn */}
+            <a
+              href="https://www.linkedin.com/in/chuck-bryant-jr-86539564/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 text-[#a0aab5] hover:text-[#00d4ff] text-sm font-medium tracking-wide uppercase transition-colors duration-200"
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              Connect on LinkedIn
+            </a>
+          </motion.div>
         </div>
       </div>
     </Section>
