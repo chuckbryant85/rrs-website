@@ -138,15 +138,9 @@ const APPROACH = [
 
 const TEAM = [
   {
-    name: "Chuck Bryant Jr.",
-    title: "Founder & Lead Developer",
-    bio: "Builds the custom technology, automation systems, and integrations that power each client engagement.",
-    initials: "CB",
-  },
-  {
     name: "Loreal Lemond",
-    title: "Client Success & Operations",
-    bio: "Manages client relationships, discovery processes, and ensures every engagement delivers measurable results.",
+    title: "Co-Founder & Partner",
+    bio: "Leads client relationships, discovery processes, and ensures every engagement delivers measurable results for the businesses we work with.",
     initials: "LL",
   },
 ];
