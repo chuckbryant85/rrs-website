@@ -17,6 +17,9 @@ import {
 const LOGO_URL =
   "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/rrs_logo_cef58a2c.png";
 
+const CHUCK_IMG =
+  "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/chuck_headshot_c9f5a3b1.png";
+
 // ── Question definitions ──────────────────────────────────────────────────────
 const QUESTIONS = [
   {
@@ -133,6 +136,21 @@ const APPROACH = [
   },
 ];
 
+const TEAM = [
+  {
+    name: "Chuck Bryant Jr.",
+    title: "Founder & Lead Developer",
+    bio: "Builds the custom technology, automation systems, and integrations that power each client engagement.",
+    initials: "CB",
+  },
+  {
+    name: "Loreal Lemond",
+    title: "Client Success & Operations",
+    bio: "Manages client relationships, discovery processes, and ensures every engagement delivers measurable results.",
+    initials: "LL",
+  },
+];
+
 // ── Multi-select question component ──────────────────────────────────────────
 function QuestionCard({
   q,
@@ -153,29 +171,33 @@ function QuestionCard({
   const answered = selections.length > 0 || otherText.trim().length > 0;
 
   return (
-    <div className="border border-slate-200 rounded-lg overflow-hidden shadow-sm">
+    <div className="border border-[#00d4ff]/20 rounded-lg overflow-hidden">
       {/* Header */}
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between px-6 py-5 bg-white hover:bg-slate-50 transition-colors text-left"
+        className="w-full flex items-center justify-between px-6 py-5 bg-[#0d1117] hover:bg-[#111820] transition-colors text-left"
       >
         <div className="flex items-center gap-4">
-          <span className="text-xs font-bold tracking-[0.2em] text-slate-400 uppercase">
+          <span className="text-xs font-bold tracking-[0.2em] text-[#00d4ff]/60 uppercase">
             Question {index + 1} of {QUESTIONS.length}
           </span>
           {answered && (
-            <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
+            <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#00d4ff] bg-[#00d4ff]/10 px-2 py-0.5 rounded-full">
               <CheckCircle2 size={12} /> Answered
             </span>
           )}
         </div>
-        {open ? <ChevronUp size={18} className="text-slate-400 shrink-0" /> : <ChevronDown size={18} className="text-slate-400 shrink-0" />}
+        {open ? (
+          <ChevronUp size={18} className="text-[#00d4ff]/40 shrink-0" />
+        ) : (
+          <ChevronDown size={18} className="text-[#00d4ff]/40 shrink-0" />
+        )}
       </button>
 
       {open && (
-        <div className="px-6 pb-6 bg-white border-t border-slate-100">
-          <h3 className="text-lg font-bold text-slate-900 mt-4 mb-1">{q.title}</h3>
-          <p className="text-sm text-slate-500 mb-5 leading-relaxed">{q.subtitle}</p>
+        <div className="px-6 pb-6 bg-[#0d1117] border-t border-[#00d4ff]/10">
+          <h3 className="text-lg font-bold text-white mt-4 mb-1">{q.title}</h3>
+          <p className="text-sm text-gray-400 mb-5 leading-relaxed">{q.subtitle}</p>
 
           <div className="grid sm:grid-cols-2 gap-2 mb-4">
             {q.options.map((opt) => {
@@ -186,16 +208,16 @@ function QuestionCard({
                   onClick={() => onToggle(opt)}
                   className={`flex items-center gap-3 px-4 py-3 rounded-md border text-sm text-left transition-all duration-150 ${
                     selected
-                      ? "border-[#1a2e5a] bg-[#1a2e5a]/5 text-[#1a2e5a] font-medium"
-                      : "border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50"
+                      ? "border-[#00d4ff] bg-[#00d4ff]/10 text-[#00d4ff] font-medium"
+                      : "border-white/10 text-gray-300 hover:border-[#00d4ff]/40 hover:bg-white/5"
                   }`}
                 >
                   <div
                     className={`w-4 h-4 rounded border shrink-0 flex items-center justify-center transition-colors ${
-                      selected ? "bg-[#1a2e5a] border-[#1a2e5a]" : "border-slate-300"
+                      selected ? "bg-[#00d4ff] border-[#00d4ff]" : "border-white/20"
                     }`}
                   >
-                    {selected && <CheckCircle2 size={10} className="text-white" />}
+                    {selected && <CheckCircle2 size={10} className="text-[#05070a]" />}
                   </div>
                   {opt}
                 </button>
@@ -204,7 +226,7 @@ function QuestionCard({
           </div>
 
           <div>
-            <label className="text-xs font-bold tracking-[0.15em] text-slate-400 uppercase block mb-2">
+            <label className="text-xs font-bold tracking-[0.15em] text-[#00d4ff]/50 uppercase block mb-2">
               Other (please specify)
             </label>
             <textarea
@@ -212,7 +234,7 @@ function QuestionCard({
               onChange={(e) => onOther(e.target.value)}
               placeholder="Describe anything not listed above..."
               rows={2}
-              className="w-full px-4 py-3 border border-slate-200 rounded-md text-sm text-slate-700 placeholder-slate-400 focus:outline-none focus:border-[#1a2e5a] resize-none"
+              className="w-full px-4 py-3 border border-white/10 rounded-md text-sm text-gray-300 placeholder-gray-600 bg-[#111820] focus:outline-none focus:border-[#00d4ff]/50 resize-none"
             />
           </div>
         </div>
@@ -278,18 +300,18 @@ export default function LFBarnes() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-[#05070a] flex items-center justify-center px-4">
         <div className="max-w-lg text-center">
-          <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle2 size={32} className="text-emerald-600" />
+          <div className="w-16 h-16 bg-[#00d4ff]/10 border border-[#00d4ff]/30 rounded-full flex items-center justify-center mx-auto mb-6">
+            <CheckCircle2 size={32} className="text-[#00d4ff]" />
           </div>
-          <h1 className="text-3xl font-bold text-slate-900 mb-3">Thank you, {name.split(" ")[0]}.</h1>
-          <p className="text-slate-600 leading-relaxed mb-8">
+          <h1 className="text-3xl font-bold text-white mb-3">Thank you, {name.split(" ")[0]}.</h1>
+          <p className="text-gray-400 leading-relaxed mb-8">
             Your responses have been received. We'll review your answers and follow up with a tailored overview of how we can support LFBarnes Law.
           </p>
           <a
             href="https://revenuerelaysystems.com"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[#1a2e5a] text-white text-sm font-semibold rounded hover:bg-[#162548] transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#00d4ff] text-[#05070a] text-sm font-bold tracking-wide uppercase rounded hover:bg-[#00bfea] transition-colors"
           >
             Visit Revenue Relay Systems <ArrowRight size={16} />
           </a>
@@ -299,32 +321,32 @@ export default function LFBarnes() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans">
+    <div className="min-h-screen bg-[#05070a] font-sans">
       {/* ── Sticky Progress Bar ── */}
-      <div className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
+      <div className="sticky top-0 z-50 bg-[#05070a]/95 backdrop-blur border-b border-white/10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
           <a href="https://revenuerelaysystems.com" className="flex items-center gap-2 shrink-0">
             <img src={LOGO_URL} alt="RRS" className="h-8 w-auto" />
             <div className="hidden sm:flex flex-col leading-tight">
-              <span className="text-[#1a2e5a] font-extrabold text-xs tracking-wide">REVENUE RELAY</span>
-              <span className="text-[#c9a84c] font-bold text-xs tracking-[0.15em]">SYSTEMS</span>
+              <span className="text-white font-extrabold text-xs tracking-wide">REVENUE RELAY</span>
+              <span className="text-[#00d4ff] font-bold text-xs tracking-[0.15em]">SYSTEMS</span>
             </div>
           </a>
           <div className="flex-1 max-w-xs">
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Progress</span>
-              <span className="text-xs font-bold text-[#1a2e5a]">{progress}%</span>
+              <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Progress</span>
+              <span className="text-xs font-bold text-[#00d4ff]">{progress}%</span>
             </div>
-            <div className="h-1.5 bg-slate-200 rounded-full overflow-hidden">
+            <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
               <div
-                className="h-full bg-emerald-500 rounded-full transition-all duration-500"
+                className="h-full bg-[#00d4ff] rounded-full transition-all duration-500"
                 style={{ width: `${progress}%` }}
               />
             </div>
           </div>
           <a
             href="#questions"
-            className="shrink-0 px-4 py-2 bg-[#1a2e5a] text-white text-xs font-bold tracking-wide uppercase rounded hover:bg-[#162548] transition-colors hidden sm:block"
+            className="shrink-0 px-4 py-2 bg-[#00d4ff] text-[#05070a] text-xs font-bold tracking-wide uppercase rounded hover:bg-[#00bfea] transition-colors hidden sm:block"
           >
             Start Discovery
           </a>
@@ -332,20 +354,21 @@ export default function LFBarnes() {
       </div>
 
       {/* ── Hero ── */}
-      <section className="bg-[#1a2e5a] text-white py-16 sm:py-20">
+      <section className="bg-[#05070a] text-white py-16 sm:py-24 border-b border-white/10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <p className="text-[#c9a84c] text-xs font-bold tracking-[0.25em] uppercase mb-4">
+          <p className="text-[#00d4ff] text-xs font-bold tracking-[0.25em] uppercase mb-4">
             Prepared for LFBarnes Law
           </p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">
-            Custom AI Workflow Solutions<br className="hidden sm:block" /> for LFBarnes Law
+            Custom AI Workflow Solutions<br className="hidden sm:block" /> for{" "}
+            <span className="text-[#00d4ff]">LFBarnes Law</span>
           </h1>
-          <p className="text-slate-300 text-lg font-light leading-relaxed max-w-2xl mb-8">
+          <p className="text-gray-400 text-lg font-light leading-relaxed max-w-2xl mb-8">
             Helping busy law firms and government-focused practices reduce manual work, streamline workflows, and create more capacity through practical AI and automation tools.
           </p>
           <a
             href="#questions"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[#c9a84c] text-[#1a2e5a] text-sm font-bold tracking-wide uppercase rounded hover:bg-[#b8963e] transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#00d4ff] text-[#05070a] text-sm font-bold tracking-wide uppercase rounded hover:bg-[#00bfea] transition-colors"
           >
             Review Questions <ArrowRight size={16} />
           </a>
@@ -353,13 +376,13 @@ export default function LFBarnes() {
       </section>
 
       {/* ── Intro ── */}
-      <section className="py-14 bg-white">
+      <section className="py-14 bg-[#05070a]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <p className="text-[#c9a84c] text-xs font-bold tracking-[0.25em] uppercase mb-3">Who We Are</p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-5">
+          <p className="text-[#00d4ff] text-xs font-bold tracking-[0.25em] uppercase mb-3">Who We Are</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
             Operational Technology Built Around How You Work
           </h2>
-          <div className="prose prose-slate max-w-none text-slate-600 leading-relaxed space-y-4">
+          <div className="text-gray-400 leading-relaxed space-y-4 max-w-3xl">
             <p>
               We work with professional-service businesses to identify the repetitive tasks, manual workflows, and operational bottlenecks that slow teams down — then we build custom AI and automation solutions around the way they already work.
             </p>
@@ -370,23 +393,50 @@ export default function LFBarnes() {
         </div>
       </section>
 
-      {/* ── Benefits ── */}
-      <section className="py-14 bg-slate-50">
+      {/* ── Team ── */}
+      <section className="py-14 bg-[#0d1117] border-y border-white/10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <p className="text-[#c9a84c] text-xs font-bold tracking-[0.25em] uppercase mb-3">How This Could Help LFBarnes Law</p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">
+          <p className="text-[#00d4ff] text-xs font-bold tracking-[0.25em] uppercase mb-3">Your Point of Contact</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8">
+            The Team Working With You
+          </h2>
+          <div className="grid sm:grid-cols-2 gap-6">
+            {TEAM.map((member, i) => (
+              <div
+                key={i}
+                className="flex items-start gap-5 p-6 border border-white/10 rounded-lg bg-[#05070a]"
+              >
+                <div className="w-14 h-14 rounded-full bg-[#00d4ff]/10 border border-[#00d4ff]/30 flex items-center justify-center shrink-0">
+                  <span className="text-[#00d4ff] font-bold text-lg tracking-wide">{member.initials}</span>
+                </div>
+                <div>
+                  <h3 className="text-white font-bold text-base mb-0.5">{member.name}</h3>
+                  <p className="text-[#00d4ff] text-xs font-semibold tracking-wide uppercase mb-2">{member.title}</p>
+                  <p className="text-gray-400 text-sm leading-relaxed">{member.bio}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Benefits ── */}
+      <section className="py-14 bg-[#05070a]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <p className="text-[#00d4ff] text-xs font-bold tracking-[0.25em] uppercase mb-3">How This Could Help LFBarnes Law</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
             For a Firm Handling Government Clients
           </h2>
-          <p className="text-slate-600 leading-relaxed mb-8 max-w-2xl">
+          <p className="text-gray-400 leading-relaxed mb-8 max-w-2xl">
             For a firm handling government clients, municipal matters, document-heavy workflows, recurring requests, deadlines, and client communication, there may be opportunities to use AI and automation to:
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {BENEFITS.map((b, i) => (
-              <div key={i} className="bg-white border border-slate-200 rounded-lg p-5 flex items-start gap-4 shadow-sm">
-                <div className="w-9 h-9 bg-[#1a2e5a]/8 rounded-md flex items-center justify-center shrink-0">
-                  <b.icon size={18} className="text-[#1a2e5a]" />
+              <div key={i} className="border border-white/10 rounded-lg p-5 flex items-start gap-4 bg-[#0d1117]">
+                <div className="w-9 h-9 bg-[#00d4ff]/10 rounded-md flex items-center justify-center shrink-0">
+                  <b.icon size={18} className="text-[#00d4ff]" />
                 </div>
-                <p className="text-slate-700 text-sm font-medium leading-snug">{b.text}</p>
+                <p className="text-gray-300 text-sm font-medium leading-snug">{b.text}</p>
               </div>
             ))}
           </div>
@@ -394,21 +444,21 @@ export default function LFBarnes() {
       </section>
 
       {/* ── Approach ── */}
-      <section className="py-14 bg-white">
+      <section className="py-14 bg-[#0d1117] border-y border-white/10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <p className="text-[#c9a84c] text-xs font-bold tracking-[0.25em] uppercase mb-3">Our Approach</p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-8">
+          <p className="text-[#00d4ff] text-xs font-bold tracking-[0.25em] uppercase mb-3">Our Approach</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8">
             Simple. Practical. Built Around You.
           </h2>
           <div className="space-y-6">
             {APPROACH.map((a, i) => (
               <div key={i} className="flex items-start gap-5">
-                <div className="w-10 h-10 bg-[#1a2e5a] text-white rounded-full flex items-center justify-center text-sm font-bold shrink-0">
+                <div className="w-10 h-10 bg-[#00d4ff] text-[#05070a] rounded-full flex items-center justify-center text-sm font-bold shrink-0">
                   {a.step}
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-slate-900 mb-1">{a.title}</h3>
-                  <p className="text-slate-600 text-sm leading-relaxed">{a.desc}</p>
+                  <h3 className="text-base font-bold text-white mb-1">{a.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">{a.desc}</p>
                 </div>
               </div>
             ))}
@@ -417,13 +467,13 @@ export default function LFBarnes() {
       </section>
 
       {/* ── Discovery Questions ── */}
-      <section id="questions" className="py-14 bg-slate-50">
+      <section id="questions" className="py-14 bg-[#05070a]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <p className="text-[#c9a84c] text-xs font-bold tracking-[0.25em] uppercase mb-3">Discovery Questions</p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">
+          <p className="text-[#00d4ff] text-xs font-bold tracking-[0.25em] uppercase mb-3">Discovery Questions</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
             Help Us Understand Your Operations
           </h2>
-          <p className="text-slate-600 mb-8 leading-relaxed">
+          <p className="text-gray-400 mb-8 leading-relaxed">
             Select all answers that apply to each question. If your situation isn't listed, use the "Other" field to describe it.
           </p>
 
@@ -442,38 +492,38 @@ export default function LFBarnes() {
           </div>
 
           {/* Contact Info */}
-          <div className="mt-8 bg-white border border-slate-200 rounded-lg p-6 shadow-sm">
-            <h3 className="text-base font-bold text-slate-900 mb-1">Your Information</h3>
-            <p className="text-sm text-slate-500 mb-5">So we can follow up with a tailored plan.</p>
+          <div className="mt-8 border border-white/10 rounded-lg p-6 bg-[#0d1117]">
+            <h3 className="text-base font-bold text-white mb-1">Your Information</h3>
+            <p className="text-sm text-gray-500 mb-5">So we can follow up with a tailored plan.</p>
             <div className="grid sm:grid-cols-3 gap-4">
               <div>
-                <label className="text-xs font-bold tracking-[0.15em] text-slate-400 uppercase block mb-1.5">Name *</label>
+                <label className="text-xs font-bold tracking-[0.15em] text-[#00d4ff]/60 uppercase block mb-1.5">Name *</label>
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Your full name"
-                  className="w-full px-4 py-2.5 border border-slate-200 rounded-md text-sm text-slate-700 placeholder-slate-400 focus:outline-none focus:border-[#1a2e5a]"
+                  className="w-full px-4 py-2.5 border border-white/10 rounded-md text-sm text-gray-200 placeholder-gray-600 bg-[#05070a] focus:outline-none focus:border-[#00d4ff]/50"
                 />
               </div>
               <div>
-                <label className="text-xs font-bold tracking-[0.15em] text-slate-400 uppercase block mb-1.5">Email *</label>
+                <label className="text-xs font-bold tracking-[0.15em] text-[#00d4ff]/60 uppercase block mb-1.5">Email *</label>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="your@email.com"
-                  className="w-full px-4 py-2.5 border border-slate-200 rounded-md text-sm text-slate-700 placeholder-slate-400 focus:outline-none focus:border-[#1a2e5a]"
+                  className="w-full px-4 py-2.5 border border-white/10 rounded-md text-sm text-gray-200 placeholder-gray-600 bg-[#05070a] focus:outline-none focus:border-[#00d4ff]/50"
                 />
               </div>
               <div>
-                <label className="text-xs font-bold tracking-[0.15em] text-slate-400 uppercase block mb-1.5">Firm / Organization</label>
+                <label className="text-xs font-bold tracking-[0.15em] text-[#00d4ff]/60 uppercase block mb-1.5">Firm / Organization</label>
                 <input
                   type="text"
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
                   placeholder="Your firm name"
-                  className="w-full px-4 py-2.5 border border-slate-200 rounded-md text-sm text-slate-700 placeholder-slate-400 focus:outline-none focus:border-[#1a2e5a]"
+                  className="w-full px-4 py-2.5 border border-white/10 rounded-md text-sm text-gray-200 placeholder-gray-600 bg-[#05070a] focus:outline-none focus:border-[#00d4ff]/50"
                 />
               </div>
             </div>
@@ -483,7 +533,7 @@ export default function LFBarnes() {
             <button
               onClick={handleSubmit}
               disabled={submitMutation.isPending}
-              className="inline-flex items-center gap-2 px-10 py-4 bg-[#1a2e5a] text-white text-sm font-bold tracking-wide uppercase rounded hover:bg-[#162548] transition-colors disabled:opacity-60"
+              className="inline-flex items-center gap-2 px-10 py-4 bg-[#00d4ff] text-[#05070a] text-sm font-bold tracking-wide uppercase rounded hover:bg-[#00bfea] transition-colors disabled:opacity-60"
             >
               {submitMutation.isPending ? "Submitting..." : "Submit Responses"}
               {!submitMutation.isPending && <ArrowRight size={16} />}
@@ -493,13 +543,13 @@ export default function LFBarnes() {
       </section>
 
       {/* ── Our Goal ── */}
-      <section className="py-14 bg-[#1a2e5a] text-white">
+      <section className="py-14 bg-[#0d1117] border-t border-white/10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <p className="text-[#c9a84c] text-xs font-bold tracking-[0.25em] uppercase mb-3">Our Goal</p>
-          <h2 className="text-2xl sm:text-3xl font-bold mb-5">
+          <p className="text-[#00d4ff] text-xs font-bold tracking-[0.25em] uppercase mb-3">Our Goal</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
             Understand First. Recommend Second.
           </h2>
-          <div className="text-slate-300 leading-relaxed space-y-4 max-w-2xl">
+          <div className="text-gray-400 leading-relaxed space-y-4 max-w-2xl">
             <p>
               Before recommending anything, we want to understand your day-to-day operations. Where is the work piling up? What are you doing repeatedly? What information are you constantly chasing? What documents or requests come up over and over again?
             </p>
@@ -510,7 +560,7 @@ export default function LFBarnes() {
           <div className="mt-8">
             <a
               href="#questions"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[#c9a84c] text-[#1a2e5a] text-sm font-bold tracking-wide uppercase rounded hover:bg-[#b8963e] transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#00d4ff] text-[#05070a] text-sm font-bold tracking-wide uppercase rounded hover:bg-[#00bfea] transition-colors"
             >
               Start Discovery <ArrowRight size={16} />
             </a>
@@ -519,14 +569,14 @@ export default function LFBarnes() {
       </section>
 
       {/* ── Footer ── */}
-      <footer className="py-6 bg-white border-t border-slate-200">
+      <footer className="py-6 bg-[#05070a] border-t border-white/10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <img src={LOGO_URL} alt="RRS" className="h-7 w-auto opacity-70" />
-            <span className="text-slate-400 text-xs font-semibold tracking-wide">Revenue Relay Systems</span>
+            <span className="text-gray-500 text-xs font-semibold tracking-wide">Revenue Relay Systems</span>
           </div>
-          <p className="text-slate-400 text-xs">3064 Wake Forest Road, Raleigh, NC 27609</p>
-          <p className="text-slate-400 text-xs">© {new Date().getFullYear()} Revenue Relay Systems</p>
+          <p className="text-gray-600 text-xs">3064 Wake Forest Road, Raleigh, NC 27609</p>
+          <p className="text-gray-600 text-xs">© {new Date().getFullYear()} Revenue Relay Systems</p>
         </div>
       </footer>
     </div>
