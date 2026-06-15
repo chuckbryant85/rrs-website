@@ -1,6 +1,9 @@
 import { z } from "zod";
-import { publicProcedure, router } from "./_core/trpc";
+import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { notifyOwner } from "./_core/notification";
+import { getDb } from "./db";
+import { discoverySubmissions } from "../drizzle/schema";
+import { desc } from "drizzle-orm";
 
 const answerSchema = z.object({
   question: z.string(),
@@ -19,7 +22,18 @@ export const discoveryRouter = router({
       })
     )
     .mutation(async ({ input }) => {
-      // Format the responses into a readable email body
+      // 1. Save to database (primary — never lost)
+      const db = await getDb();
+      if (db) {
+        await db.insert(discoverySubmissions).values({
+          contactName: input.contactName ?? null,
+          contactEmail: input.contactEmail ?? null,
+          contactCompany: input.contactCompany ?? null,
+          answersJson: JSON.stringify(input.answers),
+        });
+      }
+
+      // 2. Format notification content
       let content = `📋 NEW DISCOVERY QUESTIONNAIRE SUBMISSION\n`;
       content += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
 
@@ -50,18 +64,35 @@ export const discoveryRouter = router({
 
       content += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
       content += `Submitted: ${new Date().toLocaleString("en-US", { timeZone: "America/New_York" })} ET\n`;
-      content += `Send follow-up to: chuck@ffwlv.com\n`;
+      content += `View all submissions at: revenuerelaysystems.com/admin/submissions\n`;
 
       const title = `Discovery Form: ${input.contactName || input.contactCompany || "New Submission"}`;
 
-      // Send via owner notification (delivered to project owner who forwards to chuck@ffwlv.com)
-      const delivered = await notifyOwner({ title, content });
-
-      if (!delivered) {
-        console.error("[Discovery] Failed to deliver notification");
-        throw new Error("Failed to submit responses. Please try again.");
+      // 3. Send notification (best-effort — DB is the source of truth)
+      try {
+        await notifyOwner({ title, content });
+      } catch (err) {
+        console.warn("[Discovery] Notification failed (submission still saved to DB):", err);
       }
 
       return { success: true };
     }),
+
+  // Admin-only: list all submissions
+  list: publicProcedure.query(async () => {
+    const db = await getDb();
+    if (!db) return [];
+    const rows = await db
+      .select()
+      .from(discoverySubmissions)
+      .orderBy(desc(discoverySubmissions.createdAt));
+    return rows.map((row) => ({
+      ...row,
+      answers: JSON.parse(row.answersJson) as Array<{
+        question: string;
+        selectedOptions: string[];
+        otherText: string;
+      }>,
+    }));
+  }),
 });

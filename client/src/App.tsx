@@ -7,6 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Calculator from "./pages/Calculator";
 import Discovery from "./pages/Discovery";
+import AdminSubmissions from "./pages/AdminSubmissions";
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
@@ -14,6 +15,7 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/calculator"} component={Calculator} />
       <Route path={"/discovery"} component={Discovery} />
+      <Route path={"/admin/submissions"} component={AdminSubmissions} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
