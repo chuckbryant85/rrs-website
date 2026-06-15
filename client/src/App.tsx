@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Calculator from "./pages/Calculator";
 import Discovery from "./pages/Discovery";
 import AdminSubmissions from "./pages/AdminSubmissions";
+import LFBarnes from "./pages/LFBarnes";
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
@@ -16,6 +17,7 @@ function Router() {
       <Route path={"/calculator"} component={Calculator} />
       <Route path={"/discovery"} component={Discovery} />
       <Route path={"/admin/submissions"} component={AdminSubmissions} />
+      <Route path={"/lfbarnes"} component={LFBarnes} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
