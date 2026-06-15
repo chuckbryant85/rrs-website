@@ -17,8 +17,7 @@ import {
 const LOGO_URL =
   "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/rrs_logo_cef58a2c.png";
 
-const CHUCK_IMG =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663427471100/HXXxYWaJKn68sUQWTqrYJ5/chuck_headshot_c9f5a3b1.png";
+const LOREAL_IMG = "/manus-storage/loreal_lemond_8634f8bb.jpeg";
 
 // ── Question definitions ──────────────────────────────────────────────────────
 const QUESTIONS = [
@@ -136,13 +135,13 @@ const APPROACH = [
   },
 ];
 
-const TEAM = [
-  {
-    name: "Loreal Lemond",
-    title: "Co-Founder & Partner",
-    bio: "Leads client relationships, discovery processes, and ensures every engagement delivers measurable results for the businesses we work with.",
-    initials: "LL",
-  },
+const LOREAL_HIGHLIGHTS = [
+  "25+ years in live & virtual event production",
+  "Celebrity talent booking & management",
+  "White-glove client service & flawless execution",
+  "P&L management & budget oversight",
+  "Cross-functional team & vendor management",
+  "Brand consulting, marketing & project management",
 ];
 
 // ── Multi-select question component ──────────────────────────────────────────
@@ -387,29 +386,44 @@ export default function LFBarnes() {
         </div>
       </section>
 
-      {/* ── Team ── */}
-      <section className="py-14 bg-[#0d1117] border-y border-white/10">
+      {/* ── Partner Profile ── */}
+      <section className="py-16 bg-[#0d1117] border-y border-white/10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <p className="text-[#00d4ff] text-xs font-bold tracking-[0.25em] uppercase mb-3">Your Point of Contact</p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8">
-            The Team Working With You
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
+            Meet Your Partner at Revenue Relay Systems
           </h2>
-          <div className="grid sm:grid-cols-2 gap-6">
-            {TEAM.map((member, i) => (
-              <div
-                key={i}
-                className="flex items-start gap-5 p-6 border border-white/10 rounded-lg bg-[#05070a]"
-              >
-                <div className="w-14 h-14 rounded-full bg-[#00d4ff]/10 border border-[#00d4ff]/30 flex items-center justify-center shrink-0">
-                  <span className="text-[#00d4ff] font-bold text-lg tracking-wide">{member.initials}</span>
-                </div>
-                <div>
-                  <h3 className="text-white font-bold text-base mb-0.5">{member.name}</h3>
-                  <p className="text-[#00d4ff] text-xs font-semibold tracking-wide uppercase mb-2">{member.title}</p>
-                  <p className="text-gray-400 text-sm leading-relaxed">{member.bio}</p>
-                </div>
+          <div className="flex flex-col sm:flex-row gap-8 items-start">
+            {/* Photo */}
+            <div className="shrink-0">
+              <div className="w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden border-2 border-[#00d4ff]/40 mx-auto sm:mx-0">
+                <img
+                  src={LOREAL_IMG}
+                  alt="Loreal Lemond"
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
-            ))}
+            </div>
+            {/* Bio */}
+            <div className="flex-1">
+              <h3 className="text-white font-bold text-2xl mb-0.5">Loreal Lemond</h3>
+              <p className="text-[#00d4ff] text-sm font-semibold tracking-wide uppercase mb-4">Co-Founder &amp; Partner</p>
+              <p className="text-gray-400 leading-relaxed mb-4">
+                Accomplished professional with over 25 years of experience in live and virtual event production, celebrity talent booking and management, and experiential event programming. Known for delivering white-glove service and flawless execution across all stages of production — from initial concept to on-stage execution and post-event analysis.
+              </p>
+              <p className="text-gray-400 leading-relaxed mb-6">
+                Skilled in P&amp;L management, budget oversight, cross-functional team leadership, and client relations. Loreal brings a deep understanding of client objectives and the operational discipline to ensure every engagement delivers measurable, high-impact results.
+              </p>
+              {/* Highlights */}
+              <div className="grid sm:grid-cols-2 gap-2">
+                {LOREAL_HIGHLIGHTS.map((item, i) => (
+                  <div key={i} className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#00d4ff] shrink-0" />
+                    <span className="text-gray-300 text-sm">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
