@@ -359,12 +359,7 @@ export default function LFBarnes() {
           <p className="text-gray-400 text-lg font-light leading-relaxed max-w-2xl mb-8">
             Helping busy law firms and government-focused practices reduce manual work, streamline workflows, and create more capacity through practical AI and automation tools.
           </p>
-          <a
-            href="#questions"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[#00d4ff] text-[#05070a] text-sm font-bold tracking-wide uppercase rounded hover:bg-[#00bfea] transition-colors"
-          >
-            Review Questions <ArrowRight size={16} />
-          </a>
+
         </div>
       </section>
 
