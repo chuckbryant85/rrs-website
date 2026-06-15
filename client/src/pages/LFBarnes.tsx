@@ -391,7 +391,7 @@ export default function LFBarnes() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <p className="text-[#00d4ff] text-xs font-bold tracking-[0.25em] uppercase mb-3">Your Point of Contact</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
-            Meet Your Partner at Revenue Relay Systems
+            Meet Your Point of Contact at Revenue Relay Systems
           </h2>
           <div className="flex flex-col sm:flex-row gap-8 items-start">
             {/* Photo */}
@@ -409,10 +409,10 @@ export default function LFBarnes() {
               <h3 className="text-white font-bold text-2xl mb-0.5">Loreal Lemond</h3>
               <p className="text-[#00d4ff] text-sm font-semibold tracking-wide uppercase mb-4">Co-Founder &amp; Partner</p>
               <p className="text-gray-400 leading-relaxed mb-4">
-                Accomplished professional with over 25 years of experience in live and virtual event production, celebrity talent booking and management, and experiential event programming. Known for delivering white-glove service and flawless execution across all stages of production — from initial concept to on-stage execution and post-event analysis.
+                Loreal is a Co-Founder and Partner at Revenue Relay Systems. She brings over 25 years of experience in live and virtual event production, celebrity talent booking and management, and experiential event programming — known for delivering white-glove service and flawless execution from initial concept through final delivery.
               </p>
               <p className="text-gray-400 leading-relaxed mb-6">
-                Skilled in P&amp;L management, budget oversight, cross-functional team leadership, and client relations. Loreal brings a deep understanding of client objectives and the operational discipline to ensure every engagement delivers measurable, high-impact results.
+                At Revenue Relay Systems, Loreal leads client relationships and engagement strategy, ensuring every project is handled with the same operational discipline and attention to detail she has built her career on. Skilled in P&amp;L management, budget oversight, cross-functional team leadership, and client relations, she is your direct point of contact throughout this process.
               </p>
               {/* Highlights */}
               <div className="grid sm:grid-cols-2 gap-2">
